@@ -64,9 +64,14 @@ router.post("/login", async (req, res, next) => {
         process.env.SESSION_SECRET,
         { expiresIn: 86400 }
       );
+      res.cookie('x-access-token', token, {
+        expires: new Date(Date.now() + 86400),
+        httpOnly: true ,
+        secure: true,
+        sameSite: 'strict',
+      })
       res.json({
         ...user.dataValues,
-        token,
       });
     }
   } catch (error) {
@@ -75,6 +80,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.delete("/logout", (req, res, next) => {
+  res.clearCookie('x-access-token');
   res.sendStatus(204);
 });
 
