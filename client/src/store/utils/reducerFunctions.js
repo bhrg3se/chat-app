@@ -82,17 +82,21 @@ export const addNewConvoToStore = (state, recipientId, message) => {
   });
 };
 
-export const markAsSeen = (state, convoID) => {
+export const markAsSeen = (state, convoID, senderId) => {
   return state.map((convo) => {
-    if(convo.id===convoID){
-      const newConvo = { ...convo };
-      newConvo.messages = convo.messages.map(message=>{
+    if (convo.id === convoID) {
+      const newConvo = {...convo};
+      newConvo.messages = convo.messages.map(message => {
         let msg = message
-        msg.seen = true;
+        //mark only received messages as seen
+        //senderId from param is the id of current user
+        if (msg.senderId !== senderId) {
+          msg.seen = true;
+        }
         return msg
       })
       return newConvo
-    }else {
+    } else {
       return convo
     }
   });

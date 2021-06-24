@@ -18,6 +18,27 @@ const useStyles = makeStyles((theme) => ({
     color: "#9CADC8",
     letterSpacing: -0.17,
   },
+  previewTextUnread: {
+    fontSize: 13,
+    color: "#000000",
+    letterSpacing: -0.17,
+    fontWeight: "bold",
+  },
+  badge: {
+    display: "inline-block",
+    minWidth: "10px",
+    padding: "3px 7px",
+    fontSize: "12px",
+    fontWeight: 700,
+    lineHeight: 1,
+    color: "#fff",
+    textAlign: "center",
+    whiteSpace: "nowrap",
+    verticalAlign: "middle",
+    backgroundColor: "#3F92FF",
+    borderRadius: "10px",
+  },
+
   notification: {
     height: 20,
     width: 20,
@@ -37,20 +58,24 @@ const useStyles = makeStyles((theme) => ({
 const ChatContent = (props) => {
   const classes = useStyles();
 
-  const { conversation } = props;
-  const { latestMessageText, otherUser } = conversation;
+  const {conversation} = props;
+  const {latestMessageText, otherUser} = conversation;
+  const unreadMsgs = conversation.messages.filter(x => !x.seen && x.senderId === otherUser.id).length
 
   return (
-    <Box className={classes.root}>
-      <Box>
-        <Typography className={classes.username}>
-          {otherUser.username}
-        </Typography>
-        <Typography className={classes.previewText}>
-          {latestMessageText}
-        </Typography>
+      <Box className={classes.root}>
+        <Box>
+          <Typography className={classes.username}>
+            {otherUser.username}
+          </Typography>
+          <Typography className={unreadMsgs ? classes.previewTextUnread : classes.previewText}>
+            {latestMessageText}
+          </Typography>
+        </Box>
+        {unreadMsgs ? (<Box>
+          <div className={classes.badge}>{unreadMsgs}</div>
+        </Box>) : null}
       </Box>
-    </Box>
   );
 };
 

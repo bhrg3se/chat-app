@@ -69,10 +69,10 @@ export const addConversation = (recipientId, newMessage) => {
 };
 
 // mark all messages as seen in a conversation
-export const markMessagesAsSeen = (convoId) => {
+export const markMessagesAsSeen = (convoId, senderId) => {
   return {
     type: MARK_AS_SEEN,
-    payload: { convoId },
+    payload: {convoId, senderId},
   };
 };
 
@@ -103,7 +103,7 @@ const reducer = (state = [], action) => {
         action.payload.newMessage
       );
     case MARK_AS_SEEN:
-      return markAsSeen(state,action.payload.convoId)
+      return markAsSeen(state, action.payload.convoId, action.payload.senderId)
     default:
       return state;
   }

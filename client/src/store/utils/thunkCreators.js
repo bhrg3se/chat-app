@@ -80,12 +80,12 @@ export const fetchConversations = () => async (dispatch) => {
   }
 };
 
-export const viewChat = (convoId) => async (dispatch) => {
+export const viewChat = (convoId, senderId) => async (dispatch) => {
   dispatch(setActiveChat(convoId));
   try {
-    dispatch(markMessagesAsSeen(convoId));
-    await axios.post("/api/seen",{
-      id:convoId
+    dispatch(markMessagesAsSeen(convoId, senderId));
+    await axios.post("/api/seen", {
+      id: convoId
     });
   } catch (error) {
     console.error(error);

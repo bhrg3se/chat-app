@@ -21,7 +21,7 @@ const styles = {
 
 class Chat extends Component {
   handleClick = async (conversation) => {
-    await this.props.viewChat(conversation.id);
+    await this.props.viewChat(conversation.id, this.props.user.id);
   };
 
   render() {
@@ -46,10 +46,15 @@ class Chat extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    viewChat: (id) => {
-      dispatch(viewChat(id));
+    viewChat: (convoId, senderId) => {
+      dispatch(viewChat(convoId, senderId));
     },
   };
 };
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  };
+};
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Chat));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Chat));
