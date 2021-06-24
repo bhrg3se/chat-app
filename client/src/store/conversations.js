@@ -3,7 +3,7 @@ import {
   addOnlineUserToStore,
   addSearchedUsersToStore,
   removeOfflineUserFromStore,
-  addMessageToStore,
+  addMessageToStore, markAsSeen,
 } from "./utils/reducerFunctions";
 
 // ACTIONS
@@ -15,6 +15,7 @@ const REMOVE_OFFLINE_USER = "REMOVE_OFFLINE_USER";
 const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
 const CLEAR_SEARCHED_USERS = "CLEAR_SEARCHED_USERS";
 const ADD_CONVERSATION = "ADD_CONVERSATION";
+const MARK_AS_SEEN = "MARK_AS_SEEN";
 
 // ACTION CREATORS
 
@@ -67,6 +68,16 @@ export const addConversation = (recipientId, newMessage) => {
   };
 };
 
+// mark all messages as seen in a conversation
+export const markMessagesAsSeen = (convoId) => {
+  return {
+    type: MARK_AS_SEEN,
+    payload: { convoId },
+  };
+};
+
+
+
 // REDUCER
 
 const reducer = (state = [], action) => {
@@ -91,6 +102,8 @@ const reducer = (state = [], action) => {
         action.payload.recipientId,
         action.payload.newMessage
       );
+    case MARK_AS_SEEN:
+      return markAsSeen(state,action.payload.convoId)
     default:
       return state;
   }

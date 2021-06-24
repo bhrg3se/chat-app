@@ -11,7 +11,7 @@ router.post("/", async (req, res, next) => {
     const userId = req.user.id;
     const convoID = parseInt(req.body.id);
 
-    //TODO check if the user belong in this conversation
+    //TODO check if the user belongs to this conversation
 
     await Message.update({
       seen: true

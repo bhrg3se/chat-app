@@ -81,3 +81,19 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+export const markAsSeen = (state, convoID) => {
+  return state.map((convo) => {
+    if(convo.id===convoID){
+      const newConvo = { ...convo };
+      newConvo.messages = convo.messages.map(message=>{
+        let msg = message
+        msg.seen = true;
+        return msg
+      })
+      return newConvo
+    }else {
+      return convo
+    }
+  });
+};
