@@ -27,7 +27,7 @@ router.post("/register", async (req, res, next) => {
         {expiresIn: 86400}
     );
     res.cookie('access-token', token, {
-      expires: new Date(Date.now() + 86400),
+      expires: new Date(Date.now() + 86400000),
       httpOnly: true,
       secure: true,
       sameSite: 'strict',
@@ -70,7 +70,7 @@ router.post("/login", async (req, res, next) => {
         { expiresIn: 86400 }
       );
       res.cookie('access-token', token, {
-        expires: new Date(Date.now() + 86400),
+        expires: new Date(Date.now() + 86400000),
         httpOnly: true,
         secure: true,
         sameSite: 'strict',
