@@ -15,20 +15,25 @@ router.post("/register", async (req, res, next) => {
 
     if (password.length < 6) {
       return res
-        .status(400)
-        .json({ error: "Password must be at least 6 characters" });
+          .status(400)
+          .json({error: "Password must be at least 6 characters"});
     }
 
     const user = await User.create(req.body);
 
     const token = jwt.sign(
-      { id: user.dataValues.id },
-      process.env.SESSION_SECRET,
-      { expiresIn: 86400 }
+        {id: user.dataValues.id},
+        process.env.SESSION_SECRET,
+        {expiresIn: 86400}
     );
+    res.cookie('x-access-token', token, {
+      expires: new Date(Date.now() + 86400),
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+    })
     res.json({
       ...user.dataValues,
-      token,
     });
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
