@@ -26,7 +26,7 @@ router.post("/register", async (req, res, next) => {
         process.env.SESSION_SECRET,
         {expiresIn: 86400}
     );
-    res.cookie('x-access-token', token, {
+    res.cookie('access-token', token, {
       expires: new Date(Date.now() + 86400),
       httpOnly: true,
       secure: true,
@@ -69,9 +69,9 @@ router.post("/login", async (req, res, next) => {
         process.env.SESSION_SECRET,
         { expiresIn: 86400 }
       );
-      res.cookie('x-access-token', token, {
+      res.cookie('access-token', token, {
         expires: new Date(Date.now() + 86400),
-        httpOnly: true ,
+        httpOnly: true,
         secure: true,
         sameSite: 'strict',
       })
@@ -85,7 +85,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.delete("/logout", (req, res, next) => {
-  res.clearCookie('x-access-token');
+  res.clearCookie('access-token');
   res.sendStatus(204);
 });
 
