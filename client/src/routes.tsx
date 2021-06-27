@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchUser } from "./store/utils/thunkCreators";
+import React, {useEffect, useState} from "react";
+import {Route, Switch, withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {fetchUser} from "./store/utils/thunkCreators";
 import Signup from "./Signup.js";
 import Login from "./Login.js";
-import { Home, SnackbarError } from "./components";
+import {Home, SnackbarError} from "./components";
+import {User} from "../types";
 
-const Routes = (props) => {
-  const { user, fetchUser } = props;
+
+type RouterProps = {
+  user: User,
+  fetchUser: () => void
+}
+const Routes = (props: RouterProps) => {
+  const {user, fetchUser} = props;
   const [errorMessage, setErrorMessage] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
 
