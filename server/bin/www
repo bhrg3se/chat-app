@@ -29,7 +29,7 @@ const server = http.createServer(app);
  */
 
 const {initSocket} = require("../socket/index");
-const io = initSocket(server);
+initSocket(server);
 
 
 sessionStore

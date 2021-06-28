@@ -1,23 +1,8 @@
 export const addMessageToStore = (state, payload) => {
   const {message, sender} = payload;
-  sender.online = true;
-
-  let isNewConvo = true
-  let newConvo = state.map((convo) => {
-    if (convo.id === message.conversationId) {
-      const convoCopy = {...convo};
-      convoCopy.messages.push(message);
-      convoCopy.latestMessageText = message.text;
-      isNewConvo = false;
-      return convoCopy;
-    } else {
-      return convo;
-    }
-  });
-
-  //If not found, insert new conversation
-  if (isNewConvo) {
-    newConvo = {
+  // if sender isn't null, that means the message needs to be put in a brand new convo
+  if (sender !== null) {
+    const newConvo = {
       id: message.conversationId,
       otherUser: sender,
       messages: [message],
@@ -25,6 +10,18 @@ export const addMessageToStore = (state, payload) => {
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
   }
+
+  return state.map((convo) => {
+    if (convo.id === message.conversationId) {
+      const convoCopy = {...convo};
+      convoCopy.messages.push(message);
+      convoCopy.latestMessageText = message.text;
+      return convoCopy;
+    } else {
+      return convo;
+    }
+  });
+
 };
 
 export const addOnlineUserToStore = (state, id) => {

@@ -1,4 +1,5 @@
 const onlineUsers = require("../onlineUsers");
+const {sendMessage} = require("./messages");
 const {socketCookieParser, socketUserContext} = require("../middlewares");
 
 const initSocket = (server) => {
@@ -27,15 +28,7 @@ const initSocket = (server) => {
 
         socket.on("new-message", (data) => {
 
-            //send message to all online sockets of recipient user
-            if (onlineUsers[data.recipientId]) {
-                onlineUsers[data.recipientId].forEach(socketId => {
-                    socket.to(socketId).emit("new-message", {
-                        message: data.message,
-                        sender: socket.user,
-                    });
-                })
-            }
+            sendMessage(socket, data)
 
         });
 
@@ -54,7 +47,6 @@ const initSocket = (server) => {
 
     });
 
-    return io
 }
 
 module.exports = {initSocket}
