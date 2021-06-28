@@ -1,8 +1,17 @@
 const onlineUsers = require("../onlineUsers");
+const {socketCookieParser, socketUserContext} = require("../middlewares");
+
 const initSocket = (server) => {
     const io = require("socket.io")(server);
+    io.use(socketCookieParser);
+    io.use(socketUserContext);
 
     io.on("connection", (socket) => {
+        //If not authenticated, close socket
+        if (!socket.user) {
+            socket.disconnect();
+            return;
+        }
         socket.on("go-online", (id) => {
             //keep socket id of online users
             if (!onlineUsers[id]?.includes(socket.id)) {
@@ -23,7 +32,7 @@ const initSocket = (server) => {
                 onlineUsers[data.recipientId].forEach(socketId => {
                     socket.to(socketId).emit("new-message", {
                         message: data.message,
-                        sender: data.sender,
+                        sender: socket.user,
                     });
                 })
             }
