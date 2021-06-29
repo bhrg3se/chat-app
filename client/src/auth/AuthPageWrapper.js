@@ -5,8 +5,8 @@ import {
     Typography,
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import BGImage from "./assets/bg-img.png";
-import SVGBUbble from "./assets/bubble.svg";
+import BGImage from "../assets/bg-img.png";
+import SVGBUbble from "../assets/bubble.svg";
 
 const useStyles = makeStyles(() => ({
     leftPortion: {
