@@ -10,7 +10,7 @@ const sendMessage = async (socket, data) => {
     const senderId = socket.user.id;
     const {recipientId, text} = data;
 
-    let sender;
+    let sender = null;
 
     // find a conversation to make sure it doesn't already exist
     let conversation = await Conversation.findConversation(
@@ -35,6 +35,11 @@ const sendMessage = async (socket, data) => {
       senderId,
       text,
       conversationId: conversation.id,
+    });
+
+    socket.emit("new-message", {
+      message: message,
+      sender: sender,
     });
 
     //send message to all online sockets of recipient user

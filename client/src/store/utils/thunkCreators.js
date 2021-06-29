@@ -72,13 +72,13 @@ export const fetchConversations = () => async (dispatch) => {
 export const postMessage = (body) => async (dispatch) => {
   try {
     if (!body.conversationId) {
-      dispatch(addConversation(body.recipientId, {
-        id: Date.now(),
-        senderId: body.senderId,
-        text: body.text
-      }));
+      // dispatch(addConversation(body.recipientId, {
+      //   id: Date.now(),
+      //   senderId: body.senderId,
+      //   text: body.text
+      // }));
     } else {
-      dispatch(setNewMessage(body.text));
+      // dispatch(setNewMessage(body.text));
     }
     socket.emit("new-message", {
       text: body.text,
