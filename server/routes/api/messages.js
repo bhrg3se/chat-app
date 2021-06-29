@@ -9,17 +9,14 @@ router.post("/", async (req, res, next) => {
       return res.sendStatus(401);
     }
     const senderId = req.user.id;
-    const { recipientId, text, conversationId, sender } = req.body;
+    const {recipientId, text} = req.body;
+    let sender = null;
 
-    // if we already know conversation id, we can save time and just add it to message and return
-    if (conversationId) {
-      const message = await Message.create({ senderId, text, conversationId });
-      return res.json({ message, sender });
-    }
+
     // if we don't have conversation id, find a conversation to make sure it doesn't already exist
     let conversation = await Conversation.findConversation(
-      senderId,
-      recipientId
+        senderId,
+        recipientId
     );
 
     if (!conversation) {
@@ -28,6 +25,8 @@ router.post("/", async (req, res, next) => {
         user1Id: senderId,
         user2Id: recipientId,
       });
+      // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
+      sender = req.user
       if (onlineUsers.includes(sender.id)) {
         sender.online = true;
       }
