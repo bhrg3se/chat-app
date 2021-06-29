@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { Message } = require("../../db/models");
-const { Op } = require("sequelize");
+const {Message, Conversation} = require("../../db/models");
+const {Op} = require("sequelize");
 
 // mark all messages in a conversations as read (seen)
 router.patch("/", async (req, res, next) => {
@@ -11,14 +11,22 @@ router.patch("/", async (req, res, next) => {
     const userId = req.user.id;
     const convoID = parseInt(req.body.id);
 
-    //TODO check if the user belongs to this conversation
+    console.log(convoID)
+    console.log(typeof convoID)
+    console.log(typeof req.body.id)
+
+    //check if the user belongs to this conversation
+    const check = await Conversation.userBelongsTo(userId, convoID)
+    if (!check) {
+      return res.sendStatus(401);
+    }
 
     await Message.update({
       seen: true
-    },{
+    }, {
       where: {
         conversationId: convoID,
-        [Op.not]:{
+        [Op.not]: {
           senderId: userId
         }
       }
