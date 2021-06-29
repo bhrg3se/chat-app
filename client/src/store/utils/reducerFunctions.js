@@ -1,27 +1,31 @@
 export const addMessageToStore = (state, payload) => {
-  const { message, sender } = payload;
-  // if sender isn't null, that means the message needs to be put in a brand new convo
-  if (sender !== null) {
-    const newConvo = {
-      id: message.conversationId,
-      otherUser: sender,
-      messages: [message],
-    };
-    newConvo.latestMessageText = message.text;
-    return [newConvo, ...state];
+  const {message, sender} = payload;
+
+  // if sender is null, that means the message needs to be appended in a existing convo and move the convo to the top
+  if (sender === null) {
+    let convos = [...state]
+    let i = state.findIndex(convo => convo.id === message.conversationId)
+    const convo = {...convos[i]}
+    if (!convo) {
+      return convos
+    }
+    convo.messages.push(message);
+    convo.latestMessageText = message.text;
+
+    //bring the convo to the top of the chat list
+    convos.splice(i, 1)
+    return [convo, ...convos]
   }
 
-  return state.map((convo) => {
-    if (convo.id === message.conversationId) {
-      const convoCopy = { ...convo };
-      convoCopy.messages.push(message);
-      convoCopy.latestMessageText = message.text;
+  // if sender isn't null, that means the message needs to be put in a brand new convo
+  const newConvo = {
+    id: message.conversationId,
+    otherUser: sender,
+    messages: [message],
+  };
+  newConvo.latestMessageText = message.text;
+  return [newConvo, ...state];
 
-      return convoCopy;
-    } else {
-      return convo;
-    }
-  });
 };
 
 export const addOnlineUserToStore = (state, id) => {
