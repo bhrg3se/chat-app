@@ -1,16 +1,19 @@
 const SET_ACTIVE_CHAT = "SET_ACTIVE_CHAT";
 
-export const setActiveChat = (convoId) => {
+export const setActiveChat = (convoId, otherUserId) => {
   return {
     type: SET_ACTIVE_CHAT,
-    convoId
+    payload: {
+      convoId,
+      otherUserId
+    }
   };
 };
 
 const reducer = (state = "", action) => {
   switch (action.type) {
     case SET_ACTIVE_CHAT: {
-      return action.convoId;
+      return action.payload;
     }
     default:
       return state;

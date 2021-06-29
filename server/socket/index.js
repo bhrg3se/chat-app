@@ -1,9 +1,9 @@
 const onlineUsers = require("../onlineUsers");
-const {sendMessage} = require("./messages");
 const {socketCookieParser, socketUserContext} = require("../middlewares");
 
+let io;
 const initSocket = (server) => {
-    const io = require("socket.io")(server);
+    io = require("socket.io")(server);
     io.use(socketCookieParser);
     io.use(socketUserContext);
 
@@ -26,15 +26,9 @@ const initSocket = (server) => {
             socket.broadcast.emit("add-online-user", id);
         });
 
-        socket.on("new-message", (data) => {
-
-            sendMessage(socket, data)
-
-        });
-
         socket.on("logout", (id) => {
             //remove socket id from map of online users
-            if (onlineUsers[id].includes(socket.id)) {
+            if (onlineUsers[id]?.includes(socket.id)) {
                 let userIndex = onlineUsers[id].indexOf(id);
                 onlineUsers[id].splice(userIndex, 1);
 
@@ -48,5 +42,6 @@ const initSocket = (server) => {
     });
 
 }
+const getSocket = () => io
 
-module.exports = {initSocket}
+module.exports = {initSocket, getSocket}

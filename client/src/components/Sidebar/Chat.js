@@ -21,7 +21,7 @@ const styles = {
 
 class Chat extends Component {
   handleClick = async (conversation) => {
-    await this.props.viewChat(conversation.id, this.props.user.id);
+    await this.props.viewChat(conversation.id, this.props.user.id, conversation.otherUser.id);
   };
 
   render() {
@@ -46,8 +46,8 @@ class Chat extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    viewChat: (convoId, senderId) => {
-      dispatch(viewChat(convoId, senderId));
+    viewChat: (convoId, senderId, otherUserId) => {
+      dispatch(viewChat(convoId, senderId, otherUserId));
     },
   };
 };

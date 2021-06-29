@@ -4,7 +4,6 @@ import {
   setNewMessage,
   removeOfflineUser,
   addOnlineUser,
-  addConversation
 } from "./store/conversations";
 
 const socket = io(window.location.origin);
@@ -20,14 +19,6 @@ socket.on("connect", () => {
     store.dispatch(removeOfflineUser(id));
   });
   socket.on("new-message", (data) => {
-    // console.log(data)
-    // if( data.sender!==null ){
-    //   store.dispatch(addConversation(data.recipientId, {
-    //     id: Date.now(),
-    //     senderId: data.sender.id,
-    //     text: data.text
-    //   }));
-    // }
     store.dispatch(setNewMessage(data.message, data.sender));
   });
 });
