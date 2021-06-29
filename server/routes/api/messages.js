@@ -3,7 +3,7 @@ const { Conversation, Message } = require("../../db/models");
 const onlineUsers = require("../../onlineUsers");
 const {getSocket} = require("../../socket");
 
-// expects {recipientId, text, conversationId } in body (conversationId will be null if no conversation exists yet)
+// expects {recipientId, text } in body
 router.post("/", async (req, res, next) => {
   try {
     if (!req.user) {

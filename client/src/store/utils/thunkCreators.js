@@ -91,8 +91,7 @@ const saveMessage = async (body) => {
 };
 
 
-// message format to send: {recipientId, text, conversationId}
-// conversationId will be set to null if its a brand new conversation
+// message format to send: {recipientId, text }
 export const postMessage = (body, isNewConvo) => async (dispatch) => {
   try {
     const data = await saveMessage(body);
