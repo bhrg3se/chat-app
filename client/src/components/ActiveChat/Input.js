@@ -40,9 +40,8 @@ class Input extends Component {
     const reqBody = {
       text: event.target.text.value,
       recipientId: this.props.otherUser.id,
-      conversationId: this.props.conversationId,
     };
-    await this.props.postMessage(reqBody);
+    await this.props.postMessage(reqBody, !this.props.conversationId);
     this.setState({
       text: "",
     });
@@ -76,8 +75,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    postMessage: (message) => {
-      dispatch(postMessage(message));
+    postMessage: (message, isNewConvo) => {
+      dispatch(postMessage(message, isNewConvo));
     },
   };
 };
