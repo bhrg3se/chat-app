@@ -1,8 +1,8 @@
-import React, {useRef} from "react";
-import {Box, Badge, Avatar, Button, Popper, MenuItem, Menu} from "@material-ui/core";
+import React from "react";
+import {Box, Badge, Avatar, MenuItem, Menu} from "@material-ui/core";
 
 import {makeStyles} from "@material-ui/core/styles";
-import {fetchConversations, logout} from "../../store/utils/thunkCreators";
+import {logout} from "../../store/utils/thunkCreators";
 import {clearOnLogout} from "../../store";
 import {connect} from "react-redux";
 
@@ -24,7 +24,6 @@ const useStyles = makeStyles(() => ({
   sidebar: {
     marginLeft: 17
   },
-  logout: {}
 }));
 
 const UserAvatar = (props) => {
