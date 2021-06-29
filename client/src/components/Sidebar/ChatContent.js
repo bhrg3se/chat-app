@@ -60,7 +60,6 @@ const ChatContent = (props) => {
 
   const {conversation} = props;
   const {latestMessageText, otherUser} = conversation;
-  const unreadMsgs = conversation.messages.filter(msg => !msg.seen && msg.senderId === otherUser.id).length
 
   return (
       <Box className={classes.root}>
@@ -68,12 +67,12 @@ const ChatContent = (props) => {
           <Typography className={classes.username}>
             {otherUser.username}
           </Typography>
-          <Typography className={unreadMsgs ? classes.previewTextUnread : classes.previewText}>
+          <Typography className={conversation.unreadMsgs ? classes.previewTextUnread : classes.previewText}>
             {latestMessageText}
           </Typography>
         </Box>
-        {!!unreadMsgs && (<Box>
-          <div className={classes.badge}>{unreadMsgs}</div>
+        {!!conversation.unreadMsgs && (<Box>
+          <div className={classes.badge}>{conversation.unreadMsgs}</div>
         </Box>)}
       </Box>
   );

@@ -94,6 +94,7 @@ export const markAsSeen = (state, convoID, senderId) => {
         }
         return message
       })
+      newConvo.unreadMsgs = 0
       return newConvo
     } else {
       return convo
