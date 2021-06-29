@@ -3,7 +3,7 @@ const { Message } = require("../../db/models");
 const { Op } = require("sequelize");
 
 // mark all messages in a conversations as read (seen)
-router.post("/", async (req, res, next) => {
+router.patch("/", async (req, res, next) => {
   try {
     if (!req.user) {
       return res.sendStatus(401);
