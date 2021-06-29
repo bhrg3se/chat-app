@@ -87,13 +87,12 @@ export const markAsSeen = (state, convoID, senderId) => {
     if (convo.id === convoID) {
       const newConvo = {...convo};
       newConvo.messages = convo.messages.map(message => {
-        let msg = message
         //mark only received messages as seen
         //senderId from param is the id of current user
-        if (msg.senderId !== senderId) {
-          msg.seen = true;
+        if (message.senderId !== senderId) {
+          message.seen = true;
         }
-        return msg
+        return message
       })
       return newConvo
     } else {
