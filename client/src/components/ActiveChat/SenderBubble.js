@@ -42,7 +42,6 @@ const SenderBubble = (props) => {
         <Box className={classes.bubble}>
           <Typography className={classes.text}>{text}</Typography>
         </Box>
-        <div>{seen}</div>
         {seen ? <Avatar className={classes.tinyAvatar} src={otherUserPhotoUrl}/> : null}
       </Box>
   );
