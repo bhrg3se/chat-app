@@ -72,9 +72,9 @@ const ChatContent = (props) => {
             {latestMessageText}
           </Typography>
         </Box>
-        {unreadMsgs ? (<Box>
+        {unreadMsgs && (<Box>
           <div className={classes.badge}>{unreadMsgs}</div>
-        </Box>) : null}
+        </Box>) }
       </Box>
   );
 };
