@@ -11,14 +11,10 @@ router.patch("/", async (req, res, next) => {
     const userId = req.user.id;
     const convoID = parseInt(req.body.id);
 
-    console.log(convoID)
-    console.log(typeof convoID)
-    console.log(typeof req.body.id)
-
     //check if the user belongs to this conversation
     const check = await Conversation.userBelongsTo(userId, convoID)
     if (!check) {
-      return res.sendStatus(401);
+      return res.sendStatus(403);
     }
 
     await Message.update({
@@ -32,7 +28,7 @@ router.patch("/", async (req, res, next) => {
       }
     })
 
-    res.status(200);
+    res.sendStatus(200);
   } catch (error) {
     next(error);
   }
