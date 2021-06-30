@@ -15,7 +15,7 @@ export const LoginForm = (props) => {
 
     return (
         <form onSubmit={handleLogin}>
-            <Grid>
+            <Grid container direction={"column"} spacing={1}>
                 <Grid>
                     <FormControl margin="normal" required>
                         <TextField
@@ -27,15 +27,20 @@ export const LoginForm = (props) => {
                         />
                     </FormControl>
                 </Grid>
-                <FormControl margin="normal" required>
-                    <TextField
-                        className={classes.textField}
-                        label="password"
-                        aria-label="password"
-                        type="password"
-                        name="password"
-                    />
-                </FormControl>
+                <Grid>
+                    <FormControl margin="normal" required>
+                        <TextField
+                            className={classes.textField}
+                            label="password"
+                            aria-label="password"
+                            type="password"
+                            name="password"
+                        />
+                    </FormControl>
+                </Grid>
+                <Grid item/>
+                <Grid item/>
+                <Grid item/>
                 <Grid item alignItems={"center"} container direction={"row"}>
                     <Grid item xs={4}/>
                     <Grid item xs={4} alignItems={"center"}>

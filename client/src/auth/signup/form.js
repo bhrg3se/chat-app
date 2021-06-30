@@ -14,7 +14,7 @@ export const SignupForm = (props) => {
     const {handleRegister, formErrorMessage} = props;
     return (
         <form onSubmit={handleRegister}>
-            <Grid container direction={"column"}>
+            <Grid container direction={"column"} spacing={1}>
                 <Grid item>
                     <FormControl fullWidth>
                         <TextField
@@ -75,6 +75,9 @@ export const SignupForm = (props) => {
                         </FormHelperText>
                     </FormControl>
                 </Grid>
+                <Grid item/>
+                <Grid item/>
+                <Grid item/>
                 <Grid item alignItems={"center"} container direction={"row"}>
                     <Grid item xs={4}/>
                     <Grid item xs={4} alignItems={"center"}>
