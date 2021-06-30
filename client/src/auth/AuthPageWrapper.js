@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
 
     },
     blueLayer: {
-        backgroundColor: "rgba(59,145,205,0.7)",
+        backgroundImage: "linear-gradient(rgba(70,146,252,0.9),rgba(70,146,252,0.2))",
         width: "100%",
         height: "100%"
     },
@@ -35,7 +35,7 @@ const AuthPageWrapper = (props) => {
     const classes = useStyles()
 
     return (
-        <Grid container spacing={0} direction={"row"}>
+        <Grid justify={"center"} container spacing={0} direction={"row"}>
             <Hidden xsDown>
                 <Grid key={1} xs={4} item className={classes.leftPortion}>
                     <Grid className={classes.blueLayer} container direction={"row"} alignItems={"center"}
