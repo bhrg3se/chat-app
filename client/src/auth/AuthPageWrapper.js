@@ -7,6 +7,7 @@ import {
 import {makeStyles} from "@material-ui/core/styles";
 import BGImage from "../assets/bg-img.png";
 import SVGBUbble from "../assets/bubble.svg";
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(() => ({
     leftPortion: {
@@ -35,24 +36,27 @@ const AuthPageWrapper = (props) => {
 
     return (
         <Grid container spacing={0} direction={"row"}>
-            <Grid key={1} xs={4} item className={classes.leftPortion}>
-                <Grid className={classes.blueLayer} container direction={"row"} alignItems={"center"}
-                      alignContent={"center"}>
-                    <Grid item xs={12} align={"center"}>
-                        <img alt="Hello" className={classes.bubble} src={SVGBUbble}/>
+            <Hidden xsDown>
+                <Grid key={1} xs={4} item className={classes.leftPortion}>
+                    <Grid className={classes.blueLayer} container direction={"row"} alignItems={"center"}
+                          alignContent={"center"}>
+                        <Grid item xs={12} align={"center"}>
+                            <img alt="Hello" className={classes.bubble} src={SVGBUbble}/>
+                        </Grid>
+                        <Grid item xs={12} align={"center"}>
+                            <Typography
+                                className={classes.text}
+                                variant={"h4"}
+                            >
+                                Converse with anyone <br/>
+                                with any language
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} align={"center"}>
-                        <Typography
-                            className={classes.text}
-                            variant={"h4"}
-                        >
-                            Converse with anyone <br/>
-                            with any language
-                        </Typography>
-                    </Grid>
-                </Grid>
 
-            </Grid>
+                </Grid>
+            </Hidden>
+
             <Grid
                 key={2}
                 xs={8}
