@@ -7,7 +7,7 @@ var cookie = require('cookie');
 const httpUserContext = function (req, res, next) {
     const token = req.cookies["access-token"];
 
-    getUserFromToken(token).then((user) => {
+    validateTokenAndGetUser(token).then((user) => {
         req.user = user;
         return next();
     }).catch((err) => {
@@ -19,7 +19,7 @@ const httpUserContext = function (req, res, next) {
 const socketUserContext = function (socket, next) {
     const token = socket.cookies?.["access-token"];
 
-    getUserFromToken(token).then((user) => {
+    validateTokenAndGetUser(token).then((user) => {
         socket.user = user;
         return next();
     }).catch((err) => {
@@ -49,7 +49,7 @@ const notFound = function (req, res, next) {
 }
 
 
-const getUserFromToken = (token) => {
+const validateTokenAndGetUser = (token) => {
     return new Promise((resolve, reject) => {
         if (!token) {
             return reject()
