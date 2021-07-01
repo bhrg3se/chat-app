@@ -21,23 +21,24 @@ const useStyles = makeStyles(() => ({
 
 const Chat = (props) => {
   const classes = useStyles();
-  const handleClick = async (conversation) => {
-    await props.setActiveChat(conversation.otherUser.username);
+  const {setActiveChat, conversation} = props;
+
+  const handleClick = () => {
+    setActiveChat(conversation.otherUser.username);
   };
 
-  const otherUser = props.conversation.otherUser;
   return (
       <Box
-          onClick={() => handleClick(props.conversation)}
+          onClick={handleClick}
           className={classes.root}
       >
         <BadgeAvatar
-            photoUrl={otherUser.photoUrl}
-            username={otherUser.username}
-            online={otherUser.online}
+            photoUrl={conversation.otherUser.photoUrl}
+            username={conversation.otherUser.username}
+            online={conversation.otherUser.online}
             sidebar={true}
         />
-        <ChatContent conversation={props.conversation}/>
+        <ChatContent conversation={conversation}/>
       </Box>
     );
 
