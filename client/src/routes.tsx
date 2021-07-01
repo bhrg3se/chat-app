@@ -5,15 +5,21 @@ import {fetchUser} from "./store/utils/thunkCreators";
 import Signup from "./auth/signup";
 import Login from "./auth/login";
 import {Home, SnackbarError} from "./components";
+import {User} from "../types";
 
-const Routes = (props) => {
-    const {user, fetchUser} = props;
-    const [errorMessage, setErrorMessage] = useState("");
-    const [snackBarOpen, setSnackBarOpen] = useState(false);
 
-    useEffect(() => {
-        fetchUser();
-    }, [fetchUser]);
+type RouterProps = {
+  user: User,
+  fetchUser: () => void
+}
+const Routes = (props: RouterProps) => {
+  const {user, fetchUser} = props;
+  const [errorMessage, setErrorMessage] = useState("");
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   useEffect(() => {
     if (user.error) {
