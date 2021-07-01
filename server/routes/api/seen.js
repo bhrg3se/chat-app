@@ -6,13 +6,13 @@ const {Op} = require("sequelize");
 router.patch("/", async (req, res, next) => {
   try {
     if (!req.user) {
-      return res.sendStatus(403);
+      return res.sendStatus(401);
     }
     const userId = req.user.id;
     const convoID = parseInt(req.body.id);
 
     if (!convoID) {
-      return res.sendStatus(401);
+      return res.sendStatus(400);
     }
 
     //check if the user belongs to this conversation
