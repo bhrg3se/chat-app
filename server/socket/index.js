@@ -13,7 +13,8 @@ const initSocket = (server) => {
             socket.disconnect();
             return;
         }
-        socket.on("go-online", (id) => {
+        socket.on("go-online", () => {
+            const id = socket.user.id
             //keep socket id of online users
             if (!onlineUsers[id]?.includes(socket.id)) {
                 if (onlineUsers[id]) {
