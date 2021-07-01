@@ -35,7 +35,7 @@ const initSocket = (server) => {
                 onlineUsers[id].splice(userIndex, 1);
 
                 //if all sockets are closed, then only send "remove-offline-user" event
-                if (!onlineUsers[id]) {
+                if (!onlineUsers[id]?.length) {
                     socket.broadcast.emit("remove-offline-user", id);
                 }
             }
