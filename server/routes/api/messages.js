@@ -39,22 +39,35 @@ router.post("/", async (req, res, next) => {
       conversationId: conversation.id,
     });
 
-    const socket = getSocket();
 
     //send message to all online sockets of recipient user
     if (onlineUsers[recipientId]) {
       onlineUsers[recipientId].forEach(socketId => {
-        socket.to(socketId).emit("new-message", {
-          message: message,
-          sender: sender,
-        });
+        sendMessage(socketId, message, sender)
       })
     }
+
+    //send message to all online sockets of sender user
+    if (onlineUsers[senderId]) {
+      onlineUsers[senderId].forEach(socketId => {
+        sendMessage(socketId, message, sender)
+      })
+    }
+
 
     res.json({message, sender});
   } catch (error) {
     next(error);
   }
 });
+
+const sendMessage = (socketId, message, sender) => {
+  const socket = getSocket();
+  socket.to(socketId).emit("new-message", {
+    message: message,
+    sender: sender,
+  });
+
+}
 
 module.exports = router;
