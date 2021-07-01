@@ -1,64 +1,47 @@
-import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { Grid, CssBaseline, Button } from "@material-ui/core";
-import { SidebarContainer } from "./Sidebar";
-import { ActiveChat } from "./ActiveChat";
-import { logout, fetchConversations } from "../store/utils/thunkCreators";
-import { clearOnLogout } from "../store/index";
+import React, {useEffect, useState} from "react";
+import {makeStyles} from "@material-ui/core/styles";
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import {Grid, CssBaseline, Button} from "@material-ui/core";
+import {SidebarContainer} from "./Sidebar";
+import {ActiveChat} from "./ActiveChat";
+import {logout, fetchConversations} from "../store/utils/thunkCreators";
+import {clearOnLogout} from "../store/index";
 
-const styles = {
+const useStyles = makeStyles(() => ({
   root: {
     height: "97vh",
   },
-};
+}));
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoggedIn: false,
-    };
+const Home = (props) => {
+  const classes = useStyles();
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    props.fetchConversations();
+  }, [])
+
+  useEffect(() => {
+    setIsLoggedIn(true)
+  }, [props.user.id])
+
+
+  if (!props.user.id) {
+    // If we were previously logged in, redirect to login instead of register
+    if (isLoggedIn) return <Redirect to="/login"/>;
+    return <Redirect to="/register"/>;
   }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.user.id !== prevProps.user.id) {
-      this.setState({
-        isLoggedIn: true,
-      });
-    }
-  }
-
-  componentDidMount() {
-    this.props.fetchConversations();
-  }
-
-  handleLogout = async () => {
-    await this.props.logout();
-  };
-
-  render() {
-    const { classes } = this.props;
-    if (!this.props.user.id) {
-      // If we were previously logged in, redirect to login instead of register
-      if (this.state.isLoggedIn) return <Redirect to="/login" />;
-      return <Redirect to="/register" />;
-    }
-    return (
+  return (
       <>
-        {/* logout button will eventually be in a dropdown next to username */}
-        <Button className={classes.logout} onClick={this.handleLogout}>
-          Logout
-        </Button>
         <Grid container component="main" className={classes.root}>
-          <CssBaseline />
-          <SidebarContainer />
-          <ActiveChat />
+          <CssBaseline/>
+          <SidebarContainer/>
+          <ActiveChat/>
         </Grid>
       </>
     );
-  }
+
 }
 
 const mapStateToProps = (state) => {
@@ -70,10 +53,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: () => {
-      dispatch(logout());
-      dispatch(clearOnLogout());
-    },
     fetchConversations: () => {
       dispatch(fetchConversations());
     },
@@ -81,6 +60,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Home));
+    mapStateToProps,
+    mapDispatchToProps
+)(Home);
