@@ -54,7 +54,7 @@ export const logout = (id) => async (dispatch) => {
   try {
     await axios.delete("/auth/logout");
     dispatch(gotUser({}));
-    socket.emit("logout", id);
+    socket.emit("logout");
   } catch (error) {
     console.error(error);
   }

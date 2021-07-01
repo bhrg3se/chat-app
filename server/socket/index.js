@@ -26,7 +26,8 @@ const initSocket = (server) => {
             socket.broadcast.emit("add-online-user", id);
         });
 
-        socket.on("logout", (id) => {
+        const handleDisconnect = () => {
+            const id = socket.user.id
             //remove socket id from map of online users
             if (onlineUsers[id]?.includes(socket.id)) {
                 let userIndex = onlineUsers[id].indexOf(id);
@@ -37,7 +38,10 @@ const initSocket = (server) => {
                     socket.broadcast.emit("remove-offline-user", id);
                 }
             }
-        });
+        }
+
+        socket.on("logout", handleDisconnect);
+        socket.on("disconnect", handleDisconnect);
 
     });
 
