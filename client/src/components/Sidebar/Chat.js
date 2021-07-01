@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { Box } from "@material-ui/core";
-import { BadgeAvatar, ChatContent } from "../Sidebar";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
+import React from "react";
+import {Box} from "@material-ui/core";
+import {BadgeAvatar, ChatContent} from "../Sidebar";
+import {makeStyles} from "@material-ui/core/styles";
+import {connect} from "react-redux";
 import {viewChat} from "../../store/utils/thunkCreators";
-import {setActiveChat} from "../../store/activeConversation";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,7 +21,7 @@ const useStyles = makeStyles(() => ({
 
 const Chat = (props) => {
   const classes = useStyles();
-  const {setActiveChat, conversation,user} = props;
+  const {viewChat, conversation, user} = props;
 
   const handleClick = () => {
     viewChat(conversation.id,user.id);
