@@ -11,6 +11,10 @@ router.patch("/", async (req, res, next) => {
     const userId = req.user.id;
     const convoID = parseInt(req.body.id);
 
+    if (!convoID) {
+      return res.sendStatus(400);
+    }
+
     //check if the user belongs to this conversation
     const check = await Conversation.userBelongsTo(userId, convoID)
     if (!check) {

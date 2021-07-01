@@ -19,7 +19,7 @@ export const fetchUser = () => async (dispatch) => {
     const { data } = await axios.get("/auth/user");
     dispatch(gotUser(data));
     if (data.id) {
-      socket.emit("go-online", data.id);
+      socket.emit("go-online");
     }
   } catch (error) {
     console.error(error);
@@ -32,7 +32,7 @@ export const register = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/register", credentials);
     dispatch(gotUser(data));
-    socket.emit("go-online", data.id);
+    socket.emit("go-online");
   } catch (error) {
     console.error(error);
     dispatch(gotUser({ error: error.response.data.error || "Server Error" }));
@@ -43,18 +43,18 @@ export const login = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/login", credentials);
     dispatch(gotUser(data));
-    socket.emit("go-online", data.id);
+    socket.emit("go-online");
   } catch (error) {
     console.error(error);
     dispatch(gotUser({ error: error.response.data.error || "Server Error" }));
   }
 };
 
-export const logout = (id) => async (dispatch) => {
+export const logout = () => async (dispatch) => {
   try {
     await axios.delete("/auth/logout");
     dispatch(gotUser({}));
-    socket.emit("logout", id);
+    socket.emit("logout");
   } catch (error) {
     console.error(error);
   }
@@ -72,8 +72,8 @@ export const fetchConversations = () => async (dispatch) => {
   }
 };
 
-export const viewChat = (convoId, senderId) => async (dispatch) => {
-  dispatch(setActiveChat(convoId));
+export const viewChat = (convoId, senderId, otherUserId) => async (dispatch) => {
+  dispatch(setActiveChat(convoId, otherUserId));
   try {
     await axios.patch("/api/seen", {
       id: convoId
@@ -90,16 +90,8 @@ const saveMessage = async (body) => {
   return data;
 };
 
-const sendMessage = (data, body) => {
-  socket.emit("new-message", {
-    message: data.message,
-    recipientId: body.recipientId,
-    sender: data.sender,
-  });
-};
 
-// message format to send: {recipientId, text, conversationId}
-// conversationId will be set to null if its a brand new conversation
+// message format to send: {recipientId, text }
 export const postMessage = (body, isNewConvo) => async (dispatch) => {
   try {
     const data = await saveMessage(body);
@@ -110,7 +102,6 @@ export const postMessage = (body, isNewConvo) => async (dispatch) => {
       dispatch(setNewMessage(data.message));
     }
 
-    sendMessage(data, body);
   } catch (error) {
     console.error(error);
   }

@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { Conversation, Message } = require("../../db/models");
 const onlineUsers = require("../../onlineUsers");
+const {getSocket} = require("../../socket");
 
-// expects {recipientId, text, conversationId } in body (conversationId will be null if no conversation exists yet)
+// expects {recipientId, text } in body
 router.post("/", async (req, res, next) => {
   try {
     if (!req.user) {
@@ -27,19 +28,46 @@ router.post("/", async (req, res, next) => {
       });
       // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
       sender = req.user
-      if (onlineUsers.includes(sender.id)) {
-        sender.online = true;
-      }
+      //since the sender just sent a message they must be online
+      sender.online = true;
+
     }
     const message = await Message.create({
       senderId,
       text,
+      seen: false,
       conversationId: conversation.id,
     });
-    res.json({ message, sender });
+
+
+    //send message to all online sockets of recipient user
+    if (onlineUsers[recipientId]) {
+      onlineUsers[recipientId].forEach(socketId => {
+        sendMessage(socketId, message, sender)
+      })
+    }
+
+    //send message to all online sockets of sender user
+    if (onlineUsers[senderId]) {
+      onlineUsers[senderId].forEach(socketId => {
+        sendMessage(socketId, message, sender)
+      })
+    }
+
+
+    res.json({message, sender});
   } catch (error) {
     next(error);
   }
 });
+
+const sendMessage = (socketId, message, sender) => {
+  const socket = getSocket();
+  socket.to(socketId).emit("new-message", {
+    message: message,
+    sender: sender,
+  });
+
+}
 
 module.exports = router;

@@ -24,7 +24,7 @@ const Chat = (props) => {
   const {viewChat, conversation, user} = props;
 
   const handleClick = () => {
-    viewChat(conversation.id,user.id);
+    viewChat(conversation.id,user.id,conversation.otherUser.id);
   };
 
   return (
@@ -46,8 +46,8 @@ const Chat = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    viewChat: (convoId, senderId) => {
-      dispatch(viewChat(convoId, senderId));
+    viewChat: (convoId, senderId, otherUserId) => {
+      dispatch(viewChat(convoId, senderId, otherUserId));
     },
   };
 };
