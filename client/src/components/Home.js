@@ -26,9 +26,6 @@ const Home = (props) => {
     setIsLoggedIn(true)
   }, [props.user.id])
 
-  const handleLogout = async () => {
-    await props.logout(props.user.id);
-  };
 
   if (!props.user.id) {
     // If we were previously logged in, redirect to login instead of register
@@ -37,10 +34,6 @@ const Home = (props) => {
   }
   return (
       <>
-        {/* logout button will eventually be in a dropdown next to username */}
-        <Button onClick={handleLogout}>
-          Logout
-        </Button>
         <Grid container component="main" className={classes.root}>
           <CssBaseline/>
           <SidebarContainer/>
@@ -60,10 +53,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: (id) => {
-      dispatch(logout(id));
-      dispatch(clearOnLogout());
-    },
     fetchConversations: () => {
       dispatch(fetchConversations());
     },

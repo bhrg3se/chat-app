@@ -28,15 +28,16 @@ const Sidebar = (props) => {
     <Box className={classes.root}>
       <CurrentUser />
       <Typography className={classes.title}>Chats</Typography>
-      <Search handleChange={handleChange} />
+      <Search handleChange={handleChange}/>
       {conversations
-        .filter((conversation) => conversation.otherUser.username.includes(searchTerm))
-        .map((conversation) => {
-          return <Chat conversation={conversation} key={conversation.otherUser.username} />;
-        })}
+          .filter((conversation) => conversation.otherUser.username.includes(searchTerm))
+          .map((conversation) => {
+            return <Chat conversation={conversation} key={conversation.otherUser.username}/>;
+          })}
     </Box>
   );
 };
+
 
 const mapStateToProps = (state) => {
   return {

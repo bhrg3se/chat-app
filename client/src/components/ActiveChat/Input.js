@@ -27,14 +27,15 @@ const Input = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!event.target.text.value) {
+      return;
+    }
     // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
     const reqBody = {
       text: event.target.text.value,
       recipientId: props.otherUser.id,
-      conversationId: props.conversationId,
-      sender: props.conversationId ? null : props.user,
     };
-    await props.postMessage(reqBody);
+    await props.postMessage(reqBody, !props.conversationId);
     setText("")
   };
 
@@ -63,8 +64,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    postMessage: (message) => {
-      dispatch(postMessage(message));
+    postMessage: (message, isNewConvo) => {
+      dispatch(postMessage(message, isNewConvo));
     },
   };
 };

@@ -1,9 +1,10 @@
-import React from "react";
-import {Box} from "@material-ui/core";
-import {BadgeAvatar, ChatContent} from "../Sidebar";
-import {makeStyles} from "@material-ui/core/styles";
+import React, { Component } from "react";
+import { Box } from "@material-ui/core";
+import { BadgeAvatar, ChatContent } from "../Sidebar";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import {viewChat} from "../../store/utils/thunkCreators";
 import {setActiveChat} from "../../store/activeConversation";
-import {connect} from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -21,10 +22,10 @@ const useStyles = makeStyles(() => ({
 
 const Chat = (props) => {
   const classes = useStyles();
-  const {setActiveChat, conversation} = props;
+  const {setActiveChat, conversation,user} = props;
 
   const handleClick = () => {
-    setActiveChat(conversation.otherUser.username);
+    viewChat(conversation.id,user.id);
   };
 
   return (
@@ -46,10 +47,15 @@ const Chat = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setActiveChat: (id) => {
-      dispatch(setActiveChat(id));
+    viewChat: (convoId, senderId) => {
+      dispatch(viewChat(convoId, senderId));
     },
   };
 };
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  };
+};
 
-export default connect(null, mapDispatchToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
