@@ -1,15 +1,15 @@
-const router = require("express").Router();
-const { User } = require("../../db/models");
-const { Op } = require("sequelize");
-const onlineUsers = require("../../onlineUsers");
+const router = require('express').Router();
+const {Op} = require('sequelize');
+const {User} = require('../../db/models');
+const onlineUsers = require('../../onlineUsers');
 
 // find users by username
-router.get("/:username", async (req, res, next) => {
+router.get('/:username', async (req, res, next) => {
   try {
     if (!req.user) {
       return res.sendStatus(401);
     }
-    const { username } = req.params;
+    const {username} = req.params;
 
     const users = await User.findAll({
       where: {

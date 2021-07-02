@@ -1,31 +1,30 @@
-import React, {useEffect, useState} from "react";
-import {makeStyles} from "@material-ui/core/styles";
-import {Redirect} from "react-router-dom";
-import {connect} from "react-redux";
-import {Grid, CssBaseline, Button} from "@material-ui/core";
-import {SidebarContainer} from "./Sidebar";
-import {ActiveChat} from "./ActiveChat";
-import {logout, fetchConversations} from "../store/utils/thunkCreators";
-import {clearOnLogout} from "../store/index";
+import React, {useEffect, useState} from 'react';
+import {makeStyles} from '@material-ui/core/styles';
+import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Grid, CssBaseline, Button} from '@material-ui/core';
+import {SidebarContainer} from './Sidebar';
+import {ActiveChat} from './ActiveChat';
+import {logout, fetchConversations} from '../store/utils/thunkCreators';
+import {clearOnLogout} from '../store/index';
 
 const useStyles = makeStyles(() => ({
   root: {
-    height: "97vh",
+    height: '97vh',
   },
 }));
 
 const Home = (props) => {
   const classes = useStyles();
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     props.fetchConversations();
-  }, [])
+  }, []);
 
   useEffect(() => {
-    setIsLoggedIn(true)
-  }, [props.user.id])
-
+    setIsLoggedIn(true);
+  }, [props.user.id]);
 
   if (!props.user.id) {
     // If we were previously logged in, redirect to login instead of register
@@ -40,26 +39,21 @@ const Home = (props) => {
           <ActiveChat/>
         </Grid>
       </>
-    );
-
-}
-
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    conversations: state.conversations,
-  };
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchConversations: () => {
-      dispatch(fetchConversations());
-    },
-  };
-};
+const mapStateToProps = (state) => ({
+  user: state.user,
+  conversations: state.conversations,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchConversations: () => {
+    dispatch(fetchConversations());
+  },
+});
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Home);

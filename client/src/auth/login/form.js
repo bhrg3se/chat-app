@@ -1,13 +1,14 @@
-import {Button, FormControl, Grid, TextField} from "@material-ui/core";
-import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import {
+    Button, FormControl, Grid, TextField,
+} from '@material-ui/core';
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     textField: {
-        width: "50vw"
+        width: '50vw',
     },
 }));
-
 
 export const LoginForm = (props) => {
     const classes = useStyles();
@@ -15,7 +16,7 @@ export const LoginForm = (props) => {
 
     return (
         <form onSubmit={handleLogin}>
-            <Grid container direction={"column"} spacing={1}>
+            <Grid container direction="column" spacing={1}>
                 <Grid>
                     <FormControl margin="normal" required>
                         <TextField
@@ -41,15 +42,15 @@ export const LoginForm = (props) => {
                 <Grid item/>
                 <Grid item/>
                 <Grid item/>
-                <Grid item alignItems={"center"} container direction={"row"}>
+                <Grid item alignItems="center" container direction="row">
                     <Grid item xs={4}/>
-                    <Grid item xs={4} alignItems={"center"}>
+                    <Grid item xs={4} alignItems="center">
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             size="large"
-                            color={"primary"}
+                            color="primary"
                         >
                             Login
                         </Button>
@@ -59,5 +60,5 @@ export const LoginForm = (props) => {
             </Grid>
         </form>
 
-    )
-}
+    );
+};

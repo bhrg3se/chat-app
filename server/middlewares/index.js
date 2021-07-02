@@ -1,73 +1,62 @@
-const jwt = require("jsonwebtoken");
-const createError = require("http-errors");
-const {User} = require("../db/models");
-var cookie = require('cookie');
+const jwt = require('jsonwebtoken');
+const createError = require('http-errors');
+const cookie = require('cookie');
+const {User} = require('../db/models');
 
-//httpUserContext injects user context in http request
+// httpUserContext injects user context in http request
 const httpUserContext = function (req, res, next) {
-    const token = req.cookies["access-token"];
+    const token = req.cookies['access-token'];
 
     validateTokenAndGetUser(token).then((user) => {
         req.user = user;
         return next();
-    }).catch((err) => {
-        return next();
-    })
-}
+    }).catch((err) => next());
+};
 
-//socketUserContext injects user context in socket
+// socketUserContext injects user context in socket
 const socketUserContext = function (socket, next) {
-    const token = socket.cookies?.["access-token"];
+    const token = socket.cookies?.['access-token'];
 
     validateTokenAndGetUser(token).then((user) => {
         socket.user = user;
         return next();
-    }).catch((err) => {
-        return next();
-    })
-}
+    }).catch((err) => next());
+};
 
 const socketCookieParser = (socket, next) => {
     socket.cookies = cookie.parse(socket?.request?.headers?.cookie);
     next();
-}
-
+};
 
 const errorHandler = function (err, req, res, next) {
     // set locals, only providing error in development
     console.log(err);
     res.locals.message = err.message;
-    res.locals.error = req.app.get("env") === "development" ? err : {};
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // render the error page
     res.status(err.status || 500);
     res.json({error: err});
-}
+};
 
 const notFound = function (req, res, next) {
     next(createError(404));
-}
+};
 
+const validateTokenAndGetUser = (token) => new Promise((resolve, reject) => {
+    if (!token) {
+        return reject();
+    }
 
-const validateTokenAndGetUser = (token) => {
-    return new Promise((resolve, reject) => {
-        if (!token) {
-            return reject()
+    jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
+        if (err) {
+            return reject(err);
         }
-
-        jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
-            if (err) {
-                return reject(err);
-            }
-            User.findOne({
-                where: {id: decoded.id},
-            }).then((user) => {
-                return resolve(user);
-            });
-        });
-    })
-
-}
+        User.findOne({
+            where: {id: decoded.id},
+        }).then((user) => resolve(user));
+    });
+});
 
 module.exports = {
     errorHandler,
@@ -75,4 +64,4 @@ module.exports = {
     httpUserContext,
     socketUserContext,
     socketCookieParser,
-}
+};

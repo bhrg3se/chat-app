@@ -1,82 +1,64 @@
 import {
-  addNewConvoToStore,
-  addOnlineUserToStore,
-  addSearchedUsersToStore,
-  removeOfflineUserFromStore,
-  addMessageToStore, markAsSeen,
-} from "./utils/reducerFunctions";
+    addNewConvoToStore,
+    addOnlineUserToStore,
+    addSearchedUsersToStore,
+    removeOfflineUserFromStore,
+    addMessageToStore, markAsSeen,
+} from './utils/reducerFunctions';
 
 // ACTIONS
 
-const GET_CONVERSATIONS = "GET_CONVERSATIONS";
-const SET_MESSAGE = "SET_MESSAGE";
-const ADD_ONLINE_USER = "ADD_ONLINE_USER";
-const REMOVE_OFFLINE_USER = "REMOVE_OFFLINE_USER";
-const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
-const CLEAR_SEARCHED_USERS = "CLEAR_SEARCHED_USERS";
-const ADD_CONVERSATION = "ADD_CONVERSATION";
-const MARK_AS_SEEN = "MARK_AS_SEEN";
+const GET_CONVERSATIONS = 'GET_CONVERSATIONS';
+const SET_MESSAGE = 'SET_MESSAGE';
+const ADD_ONLINE_USER = 'ADD_ONLINE_USER';
+const REMOVE_OFFLINE_USER = 'REMOVE_OFFLINE_USER';
+const SET_SEARCHED_USERS = 'SET_SEARCHED_USERS';
+const CLEAR_SEARCHED_USERS = 'CLEAR_SEARCHED_USERS';
+const ADD_CONVERSATION = 'ADD_CONVERSATION';
+const MARK_AS_SEEN = 'MARK_AS_SEEN';
 
 // ACTION CREATORS
 
-export const gotConversations = (conversations) => {
-  return {
+export const gotConversations = (conversations) => ({
     type: GET_CONVERSATIONS,
     conversations,
-  };
-};
+});
 
-export const setNewMessage = (message, sender) => {
-  return {
+export const setNewMessage = (message, sender) => ({
     type: SET_MESSAGE,
-    payload: { message, sender: sender || null },
-  };
-};
+    payload: {message, sender: sender || null},
+});
 
-export const addOnlineUser = (id) => {
-  return {
+export const addOnlineUser = (id) => ({
     type: ADD_ONLINE_USER,
     id,
-  };
-};
+});
 
-export const removeOfflineUser = (id) => {
-  return {
+export const removeOfflineUser = (id) => ({
     type: REMOVE_OFFLINE_USER,
     id,
-  };
-};
+});
 
-export const setSearchedUsers = (users) => {
-  return {
+export const setSearchedUsers = (users) => ({
     type: SET_SEARCHED_USERS,
     users,
-  };
-};
+});
 
-export const clearSearchedUsers = () => {
-  return {
+export const clearSearchedUsers = () => ({
     type: CLEAR_SEARCHED_USERS,
-  };
-};
+});
 
 // add new conversation when sending a new message
-export const addConversation = (recipientId, newMessage) => {
-  return {
+export const addConversation = (recipientId, newMessage) => ({
     type: ADD_CONVERSATION,
-    payload: { recipientId, newMessage },
-  };
-};
+    payload: {recipientId, newMessage},
+});
 
 // mark all messages as seen in a conversation
-export const markMessagesAsSeen = (convoId, senderId) => {
-  return {
+export const markMessagesAsSeen = (convoId, senderId) => ({
     type: MARK_AS_SEEN,
     payload: {convoId, senderId},
-  };
-};
-
-
+});
 
 // REDUCER
 
@@ -98,12 +80,12 @@ const reducer = (state = [], action) => {
       return state.filter((convo) => convo.id);
     case ADD_CONVERSATION:
       return addNewConvoToStore(
-        state,
-        action.payload.recipientId,
-        action.payload.newMessage
+          state,
+          action.payload.recipientId,
+          action.payload.newMessage,
       );
     case MARK_AS_SEEN:
-      return markAsSeen(state, action.payload.convoId, action.payload.senderId)
+        return markAsSeen(state, action.payload.convoId, action.payload.senderId);
     default:
       return state;
   }
