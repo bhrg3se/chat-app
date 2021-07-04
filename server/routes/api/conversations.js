@@ -89,5 +89,5 @@ const addExtraFields = (conversations, onlineUsers) => {
 
 module.exports = {
   router,
-  addExtraFields: addExtraFields
+  addExtraFields
 };
