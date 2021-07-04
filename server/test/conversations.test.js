@@ -48,7 +48,7 @@ describe("addExtraFields", () => {
             }
         ]
 
-        let onliceUsers = {};
+        const onliceUsers = {};
         const resultConvos = addExtraFields(mockConvos, onliceUsers)
         expect(resultConvos[0].latestMessageText).to.eql("Share photo of your city, please")
         done();
