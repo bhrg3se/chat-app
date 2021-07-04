@@ -99,7 +99,7 @@ describe("addExtraFields", () => {
                 }
             }
         ]
-        let onliceUsers = {};
+        const onliceUsers = {};
         const resultConvos = addExtraFields(mockConvos, onliceUsers)
         expect(resultConvos[0].unreadMsgs).to.eql(2)
         done();
