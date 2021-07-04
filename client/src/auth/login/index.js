@@ -48,16 +48,16 @@ const Login = (props) => {
         <AuthPageWrapper>
             <Grid container item direction={"row"} xs={9} alignItems={"center"} justify={"flex-end"}>
                 <Grid item xs={5}>
-                    <Typography className={classes.label} variant={"h7"}>Don't have an account?</Typography>
+                    <Typography className={classes.label} variant={"subtitle1"}>Don't have an account?</Typography>
                 </Grid>
                 <Grid item xs={5}>
                     <Button
                         className={classes.shadowButton}
                         size={"large"}
                         onClick={() => history.push("/register")}
-                        variant="raised"
+                        variant="text"
                     >
-                        <Typography variant={"h7"} color={"primary"}>Create account</Typography>
+                        <Typography variant={"subtitle1"} color={"primary"}>Create account</Typography>
                     </Button>
                 </Grid>
             </Grid>
