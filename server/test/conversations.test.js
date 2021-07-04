@@ -55,7 +55,7 @@ describe("addExtraFields", () => {
 
     });
 
-    it("it should add correct unread messages value", done => {
+    it("should add correct unread messages value", done => {
         const mockConvos = [
             {
                 "id": 1,
