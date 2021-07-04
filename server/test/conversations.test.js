@@ -1,7 +1,7 @@
 const {expect} = require("chai");
 const {addExtraFields} = require("../routes/api/conversations");
 
-describe("Test AddFields Function", () => {
+describe("addExtraFields", () => {
 
     it("it should add correct lastMessage value", done => {
         const mockConvos = [
@@ -107,4 +107,3 @@ describe("Test AddFields Function", () => {
 
 
 });
-
