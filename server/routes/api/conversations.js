@@ -58,7 +58,7 @@ router.get("/", async (req, res, next) => {
 
 
 const addExtraFields = (conversations, onlineUsers) => {
-  for (let i = 0; i < conversations.length; i++) {
+  return conversations.map((conversation) => {...})
     const convo = conversations[i];
     const convoJSON = convo.toJSON();
 
