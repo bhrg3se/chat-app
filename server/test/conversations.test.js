@@ -3,7 +3,7 @@ const {addExtraFields} = require("../routes/api/conversations");
 
 describe("addExtraFields", () => {
 
-    it("it should add correct lastMessage value", done => {
+    it("should add correct lastMessage value", done => {
         const mockConvos = [
             {
                 "id": 1,
