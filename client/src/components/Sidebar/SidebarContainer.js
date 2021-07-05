@@ -21,11 +21,11 @@ const SidebarContainer = (props) => {
             setSearchTerm(event.target.value);
             return;
         }
-    await searchUsers(event.target.value);
-    setSearchTerm(event.target.value);
-  };
+        await searchUsers(event.target.value);
+        setSearchTerm(event.target.value);
+    };
 
-  return <Sidebar handleChange={handleChange} searchTerm={searchTerm} />;
+    return <Sidebar handleChange={handleChange} searchTerm={searchTerm}/>;
 };
 
 const mapDispatchToProps = (dispatch) => ({

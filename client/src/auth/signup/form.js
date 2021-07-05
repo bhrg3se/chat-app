@@ -23,7 +23,7 @@ export const SignupForm = (props) => {
                             aria-label="username"
                             label="Username"
                             name="username"
-                            autoComplete={"username"}
+                            autoComplete="username"
                             fullWidth
                             type="text"
                             required
@@ -37,7 +37,7 @@ export const SignupForm = (props) => {
                             label="E-mail address"
                             aria-label="e-mail address"
                             type="email"
-                            autoComplete={"email"}
+                            autoComplete="email"
                             fullWidth
                             name="email"
                             required
@@ -51,7 +51,7 @@ export const SignupForm = (props) => {
                             className={classes.textField}
                             label="Password"
                             type="password"
-                            autoComplete={"new-password"}
+                            autoComplete="new-password"
                             fullWidth
                             inputProps={{minLength: 6}}
                             name="password"
@@ -69,7 +69,7 @@ export const SignupForm = (props) => {
                             className={classes.textField}
                             aria-label="confirm password"
                             type="password"
-                            autoComplete={"new-password"}
+                            autoComplete="new-password"
                             fullWidth
                             inputProps={{minLength: 6}}
                             name="confirmPassword"

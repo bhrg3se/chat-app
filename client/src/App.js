@@ -16,7 +16,7 @@ function App() {
                 </BrowserRouter>
             </MuiThemeProvider>
         </Provider>
-  );
+    );
 }
 
 export default App;

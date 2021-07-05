@@ -5,14 +5,14 @@ import {connect} from 'react-redux';
 import {Input, Header, Messages} from './index';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexGrow: 8,
-    flexDirection: 'column',
-    height: '100%',
-  },
-  chatContainer: {
-    marginLeft: 41,
+    root: {
+        display: 'flex',
+        flexGrow: 8,
+        flexDirection: 'column',
+        height: '100%',
+    },
+    chatContainer: {
+        marginLeft: 41,
     marginRight: 41,
     display: 'flex',
     flexDirection: 'column',
@@ -31,22 +31,22 @@ const ActiveChat = (props) => {
     <Box className={classes.root}>
       {conversation.otherUser && (
         <>
-          <Header
-              username={conversation.otherUser.username}
-              online={conversation.otherUser.online || false}
-          />
-          <Box className={classes.chatContainer}>
-            <Messages
-                messages={conversation.messages}
-                otherUser={conversation.otherUser}
-                userId={user.id}
+            <Header
+                username={conversation.otherUser.username}
+                online={conversation.otherUser.online || false}
             />
-          </Box>
-          <Input
-              otherUser={conversation.otherUser}
-              conversationId={conversation.id}
-              user={user}
-          />
+            <Box className={classes.chatContainer}>
+                <Messages
+                    messages={conversation.messages}
+                    otherUser={conversation.otherUser}
+                    userId={user.id}
+                />
+            </Box>
+            <Input
+                otherUser={conversation.otherUser}
+                conversationId={conversation.id}
+                user={user}
+            />
         </>
       )}
     </Box>
@@ -59,10 +59,10 @@ const mapStateToProps = (state) => ({
       state.conversations
       && state.conversations.find(
       (conversation) => {
-        if (conversation.id) {
-          return conversation.id === state.activeConversation.convoId;
-        }
-        return conversation.otherUser.id === state.activeConversation.otherUserId;
+          if (conversation.id) {
+              return conversation.id === state.activeConversation.convoId;
+          }
+          return conversation.otherUser.id === state.activeConversation.otherUserId;
       },
       ),
 });

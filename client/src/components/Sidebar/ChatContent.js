@@ -13,17 +13,17 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         letterSpacing: -0.2,
     },
-  previewText: {
-      fontSize: 12,
-      color: '#9CADC8',
-      letterSpacing: -0.17,
-  },
-  previewTextUnread: {
-      fontSize: 13,
-      color: '#000000',
-      letterSpacing: -0.17,
-      fontWeight: 'bold',
-  },
+    previewText: {
+        fontSize: 12,
+        color: '#9CADC8',
+        letterSpacing: -0.17,
+    },
+    previewTextUnread: {
+        fontSize: 13,
+        color: '#000000',
+        letterSpacing: -0.17,
+        fontWeight: 'bold',
+    },
   badge: {
       display: 'inline-block',
       minWidth: '10px',

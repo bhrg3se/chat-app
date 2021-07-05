@@ -37,9 +37,13 @@ const AuthPageWrapper = (props) => {
         <Grid justify="center" container spacing={0} direction="row">
             <Hidden xsDown>
                 <Grid key={1} xs={4} item className={classes.leftPortion}>
-                    <Grid className={classes.blueLayer} container direction={"row"}
-                          alignContent={"center"}>
-                        <Grid item xs={12} align={"center"}>
+                    <Grid
+                        className={classes.blueLayer}
+                        container
+                        direction="row"
+                        alignContent="center"
+                    >
+                        <Grid item xs={12} align="center">
                             <img alt="Hello" className={classes.bubble} src={SVGBUbble}/>
                         </Grid>
                         <Grid item xs={12} align="center">

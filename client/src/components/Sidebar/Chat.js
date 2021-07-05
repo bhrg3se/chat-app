@@ -6,22 +6,22 @@ import {BadgeAvatar, ChatContent} from '.';
 import {viewChat} from '../../store/utils/thunkCreators';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    borderRadius: 8,
-    height: 80,
-    boxShadow: '0 2px 10px 0 rgba(88,133,196,0.05)',
-    marginBottom: 10,
-    display: 'flex',
-    alignItems: 'center',
-    '&:hover': {
+    root: {
+        borderRadius: 8,
+        height: 80,
+        boxShadow: '0 2px 10px 0 rgba(88,133,196,0.05)',
+        marginBottom: 10,
+        display: 'flex',
+        alignItems: 'center',
+        '&:hover': {
       cursor: 'grab',
     },
   },
 }));
 
 const Chat = (props) => {
-  const classes = useStyles();
-  const {viewChat, conversation, user} = props;
+    const classes = useStyles();
+    const {viewChat, conversation, user} = props;
 
   const handleClick = () => {
     viewChat(conversation.id, user.id, conversation.otherUser.id);
@@ -32,13 +32,13 @@ const Chat = (props) => {
           onClick={handleClick}
           className={classes.root}
       >
-        <BadgeAvatar
-            photoUrl={conversation.otherUser.photoUrl}
-            username={conversation.otherUser.username}
-            online={conversation.otherUser.online}
-            sidebar
-        />
-        <ChatContent conversation={conversation}/>
+          <BadgeAvatar
+              photoUrl={conversation.otherUser.photoUrl}
+              username={conversation.otherUser.username}
+              online={conversation.otherUser.online}
+              sidebar
+          />
+          <ChatContent conversation={conversation}/>
       </Box>
   );
 };

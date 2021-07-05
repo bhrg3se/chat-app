@@ -9,14 +9,14 @@ import {logout, fetchConversations} from '../store/utils/thunkCreators';
 import {clearOnLogout} from '../store/index';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    height: '97vh',
-  },
+    root: {
+        height: '97vh',
+    },
 }));
 
 const Home = (props) => {
-  const classes = useStyles();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const classes = useStyles();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     props.fetchConversations();
@@ -27,17 +27,17 @@ const Home = (props) => {
   }, [props.user.id]);
 
   if (!props.user.id) {
-    // If we were previously logged in, redirect to login instead of register
-    if (isLoggedIn) return <Redirect to="/login"/>;
-    return <Redirect to="/register"/>;
+      // If we were previously logged in, redirect to login instead of register
+      if (isLoggedIn) return <Redirect to="/login"/>;
+      return <Redirect to="/register"/>;
   }
   return (
       <>
-        <Grid container component="main" className={classes.root}>
-          <CssBaseline/>
-          <SidebarContainer/>
-          <ActiveChat/>
-        </Grid>
+          <Grid container component="main" className={classes.root}>
+              <CssBaseline/>
+              <SidebarContainer/>
+              <ActiveChat/>
+          </Grid>
       </>
   );
 };

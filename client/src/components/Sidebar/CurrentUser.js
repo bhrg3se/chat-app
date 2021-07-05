@@ -38,13 +38,13 @@ const CurrentUser = (props) => {
   const user = props.user || {};
 
   return (
-    <Box className={classes.root}>
-        <BadgeAvatar photoUrl={user.photoUrl} online/>
-        <Box className={classes.subContainer}>
-            <Typography className={classes.username}>{user.username}</Typography>
-            <MoreHorizIcon classes={{root: classes.ellipsis}}/>
-        </Box>
-    </Box>
+      <Box className={classes.root}>
+          <BadgeAvatar photoUrl={user.photoUrl} online/>
+          <Box className={classes.subContainer}>
+              <Typography className={classes.username}>{user.username}</Typography>
+              <MoreHorizIcon classes={{root: classes.ellipsis}}/>
+          </Box>
+      </Box>
   );
 };
 

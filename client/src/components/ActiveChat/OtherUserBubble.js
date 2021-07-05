@@ -12,12 +12,12 @@ const useStyles = makeStyles(() => ({
         marginRight: 11,
         marginTop: 6,
     },
-  usernameDate: {
-      fontSize: 11,
-      color: '#BECCE2',
-      fontWeight: 'bold',
-      marginBottom: 5,
-  },
+    usernameDate: {
+        fontSize: 11,
+        color: '#BECCE2',
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
     bubble: {
         backgroundImage: 'linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)',
         borderRadius: '0 10px 10px 10px',
@@ -35,19 +35,19 @@ const OtherUserBubble = (props) => {
   const classes = useStyles();
   const { text, time, otherUser } = props;
   return (
-    <Box className={classes.root}>
-        <Avatar alt={otherUser.username} src={otherUser.photoUrl} className={classes.avatar}/>
-        <Box>
-            <Typography className={classes.usernameDate}>
-                {otherUser.username}
-                {' '}
-                {time}
-            </Typography>
-            <Box className={classes.bubble}>
-                <Typography className={classes.text}>{text}</Typography>
-            </Box>
-        </Box>
-    </Box>
+      <Box className={classes.root}>
+          <Avatar alt={otherUser.username} src={otherUser.photoUrl} className={classes.avatar}/>
+          <Box>
+              <Typography className={classes.usernameDate}>
+                  {otherUser.username}
+                  {' '}
+                  {time}
+              </Typography>
+              <Box className={classes.bubble}>
+                  <Typography className={classes.text}>{text}</Typography>
+              </Box>
+          </Box>
+      </Box>
   );
 };
 

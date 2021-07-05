@@ -25,8 +25,8 @@ Conversation.userBelongsTo = async function (userId, convoID) {
   const conversation = await Conversation.findOne({
     where: {
       [Op.or]: [
-        {user1Id: userId},
-        {user2Id: userId},
+          {user1Id: userId},
+          {user2Id: userId},
       ],
       id: convoID,
     },

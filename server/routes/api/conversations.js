@@ -48,7 +48,7 @@ router.get('/', async (req, res, next) => {
       ],
     });
 
-    conversations = addExtraFields(conversations, onlineUsers)
+    conversations = addExtraFields(conversations, onlineUsers);
 
     res.json(conversations);
   } catch (error) {
@@ -56,38 +56,30 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+const addExtraFields = (conversations, onlineUsers) => conversations.map((convo) => {
+  const convoJSON = convo.toJSON();
 
-const addExtraFields = (conversations, onlineUsers) => {
-  return conversations.map((conversation) => {...})
-    const convo = conversations[i];
-    const convoJSON = convo.toJSON();
-
-    // set a property "otherUser" so that frontend will have easier access
-    if (convoJSON.user1) {
-      convoJSON.otherUser = convoJSON.user1;
-      delete convoJSON.user1;
-    } else if (convoJSON.user2) {
-      convoJSON.otherUser = convoJSON.user2;
-      delete convoJSON.user2;
-    }
-
-    // set property for online status of the other user
-  convoJSON.otherUser.online = !!onlineUsers[convoJSON.otherUser.id];
-
-    // set properties for notification count and latest message preview
-    convoJSON.latestMessageText = convoJSON?.messages?.[convoJSON.messages?.length - 1]?.text;
-
-    // set unread messages count
-    convoJSON.unreadMsgs = convoJSON.messages.filter(msg => !msg.seen && msg.senderId === convoJSON.otherUser.id).length
-    conversations[i] = convoJSON;
+  // set a property "otherUser" so that frontend will have easier access
+  if (convoJSON.user1) {
+    convoJSON.otherUser = convoJSON.user1;
+    delete convoJSON.user1;
+  } else if (convoJSON.user2) {
+    convoJSON.otherUser = convoJSON.user2;
+    delete convoJSON.user2;
   }
 
-  return conversations
+  // set property for online status of the other user
+  convoJSON.otherUser.online = !!onlineUsers[convoJSON.otherUser.id];
 
-}
+  // set properties for notification count and latest message preview
+  convoJSON.latestMessageText = convoJSON?.messages?.[convoJSON.messages?.length - 1]?.text;
 
+  // set unread messages count
+  convoJSON.unreadMsgs = convoJSON.messages.filter((msg) => !msg.seen && msg.senderId === convoJSON.otherUser.id).length;
+  return convoJSON;
+});
 
 module.exports = {
   router,
-  addExtraFields
+  addExtraFields,
 };

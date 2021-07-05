@@ -14,13 +14,13 @@ const useStyles = makeStyles(() => ({
         fontWeight: 'bold',
         marginBottom: 5,
     },
-  text: {
-      fontSize: 14,
-      color: '#91A3C0',
-      letterSpacing: -0.2,
-      padding: 8,
-      fontWeight: 'bold',
-  },
+    text: {
+        fontSize: 14,
+        color: '#91A3C0',
+        letterSpacing: -0.2,
+        padding: 8,
+        fontWeight: 'bold',
+    },
     bubble: {
         background: '#F4F6FA',
         borderRadius: '10px 10px 0 10px',

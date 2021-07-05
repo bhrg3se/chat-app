@@ -5,11 +5,11 @@ const onlineUsers = require('../../onlineUsers');
 
 // find users by username
 router.get('/:username', async (req, res, next) => {
-  try {
-    if (!req.user) {
-      return res.sendStatus(401);
-    }
-    const {username} = req.params;
+    try {
+        if (!req.user) {
+            return res.sendStatus(401);
+        }
+        const {username} = req.params;
 
     const users = await User.findAll({
       where: {

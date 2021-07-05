@@ -36,7 +36,7 @@ const SnackbarError = (props) => {
                   root: classes.snackbar,
               },
           }}
-    />
+      />
   );
 };
 

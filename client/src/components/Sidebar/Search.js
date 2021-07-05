@@ -31,20 +31,20 @@ const Search = (props) => {
   };
   return (
       <form onSubmit={handleSubmit}>
-        <FormControl fullWidth hiddenLabel>
-          <FilledInput
-              name="search"
-              onChange={props.handleChange}
-              classes={{root: classes.filledInput, input: classes.input}}
-              disableUnderline
-              placeholder="Search"
-              startAdornment={(
-                  <InputAdornment position="start">
-                    <SearchIcon/>
-                  </InputAdornment>
-              )}
-          />
-        </FormControl>
+          <FormControl fullWidth hiddenLabel>
+              <FilledInput
+                  name="search"
+                  onChange={props.handleChange}
+                  classes={{root: classes.filledInput, input: classes.input}}
+                  disableUnderline
+                  placeholder="Search"
+                  startAdornment={(
+                      <InputAdornment position="start">
+                          <SearchIcon/>
+                      </InputAdornment>
+                  )}
+              />
+          </FormControl>
       </form>
   );
 };

@@ -11,7 +11,7 @@
 // opt-in, read https://bit.ly/CRA-PWA
 
 const isLocalhost = Boolean(
-    window.location.hostname === 'localhost'
+  window.location.hostname === 'localhost'
     // [::1] is the IPv6 localhost address.
     || window.location.hostname === '[::1]'
     // 127.0.0.1/8 is considered localhost for IPv4.
@@ -68,21 +68,21 @@ function registerValidSW(swUrl, config) {
                         if (navigator.serviceWorker.controller) {
                             // At this point, the updated precached content has been fetched,
                             // but the previous service worker will still serve the older
-              // content until all client tabs are closed.
-              console.log(
-                  'New content is available and will be used when all '
-                  + 'tabs for this page are closed. See https://bit.ly/CRA-PWA.',
-              );
+                            // content until all client tabs are closed.
+                            console.log(
+                                'New content is available and will be used when all '
+                                + 'tabs for this page are closed. See https://bit.ly/CRA-PWA.',
+                            );
 
-              // Execute callback
-              if (config && config.onUpdate) {
-                config.onUpdate(registration);
-              }
-            } else {
-              // At this point, everything has been precached.
-              // It's the perfect time to display a
-              // "Content is cached for offline use." message.
-              console.log('Content is cached for offline use.');
+                            // Execute callback
+                            if (config && config.onUpdate) {
+                                config.onUpdate(registration);
+                            }
+                        } else {
+                            // At this point, everything has been precached.
+                            // It's the perfect time to display a
+                            // "Content is cached for offline use." message.
+                            console.log('Content is cached for offline use.');
 
                             // Execute callback
                             if (config && config.onSuccess) {
@@ -99,7 +99,7 @@ function registerValidSW(swUrl, config) {
 }
 
 function checkValidServiceWorker(swUrl, config) {
-  // Check if the service worker can be found. If it can't reload the page.
+    // Check if the service worker can be found. If it can't reload the page.
     fetch(swUrl)
         .then((response) => {
             // Ensure service worker exists, and that we really are getting a JS file.
@@ -117,7 +117,7 @@ function checkValidServiceWorker(swUrl, config) {
             } else {
                 // Service worker found. Proceed as normal.
                 registerValidSW(swUrl, config);
-      }
+            }
     })
     .catch(() => {
       console.log(
