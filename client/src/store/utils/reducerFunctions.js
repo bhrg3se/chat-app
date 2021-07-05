@@ -3,21 +3,21 @@ export const addMessageToStore = (state, payload) => {
 
   // if sender is null, that means the message needs to be appended in a existing convo and move the convo to the top
   if (sender === null) {
-      const convos = [...state];
-      const i = state.findIndex((convo) => convo.id === message.conversationId);
-      const convo = {...convos[i]};
-      if (!convo) {
-          return convos;
-      }
-      convo.messages.push(message);
-      convo.latestMessageText = message.text;
-      if (!message.seen && message.senderId === convo.otherUser.id) {
-          convo.unreadMsgs += 1;
-      }
+    const convos = [...state];
+    const i = state.findIndex((convo) => convo.id === message.conversationId);
+    const convo = {...convos[i]};
+    if (!convo) {
+      return convos;
+    }
+    convo.messages.push(message);
+    convo.latestMessageText = message.text;
+    if (!message.seen && message.senderId === convo.otherUser.id) {
+      convo.unreadMsgs += 1;
+    }
 
-      // bring the convo to the top of the chat list
-      convos.splice(i, 1);
-      return [convo, ...convos];
+    // bring the convo to the top of the chat list
+    convos.splice(i, 1);
+    return [convo, ...convos];
   }
 
   // if sender isn't null, that means the message needs to be put in a brand new convo
@@ -31,21 +31,21 @@ export const addMessageToStore = (state, payload) => {
 };
 
 export const addOnlineUserToStore = (state, id) => state.map((convo) => {
-    if (convo.otherUser.id === id) {
-        const convoCopy = {...convo};
-        convoCopy.otherUser.online = true;
-        return convoCopy;
-    }
-    return convo;
+  if (convo.otherUser.id === id) {
+    const convoCopy = {...convo};
+    convoCopy.otherUser.online = true;
+    return convoCopy;
+  }
+  return convo;
 });
 
 export const removeOfflineUserFromStore = (state, id) => state.map((convo) => {
-    if (convo.otherUser.id === id) {
-        const convoCopy = {...convo};
-        convoCopy.otherUser.online = false;
-        return convoCopy;
-    }
-    return convo;
+  if (convo.otherUser.id === id) {
+    const convoCopy = {...convo};
+    convoCopy.otherUser.online = false;
+    return convoCopy;
+  }
+  return convo;
 });
 
 export const addSearchedUsersToStore = (state, users) => {
@@ -60,7 +60,7 @@ export const addSearchedUsersToStore = (state, users) => {
   users.forEach((user) => {
     // only create a fake convo if we don't already have a convo with this user
     if (!currentUsers[user.id]) {
-        const fakeConvo = {otherUser: user, messages: []};
+      const fakeConvo = {otherUser: user, messages: []};
       newState.push(fakeConvo);
     }
   });
@@ -69,29 +69,29 @@ export const addSearchedUsersToStore = (state, users) => {
 };
 
 export const addNewConvoToStore = (state, recipientId, message) => state.map((convo) => {
-    if (convo.otherUser.id === recipientId) {
-        const newConvo = {...convo};
-        newConvo.id = message.conversationId;
-        newConvo.messages.push(message);
-        newConvo.latestMessageText = message.text;
-        return newConvo;
-    }
-    return convo;
+  if (convo.otherUser.id === recipientId) {
+    const newConvo = {...convo};
+    newConvo.id = message.conversationId;
+    newConvo.messages.push(message);
+    newConvo.latestMessageText = message.text;
+    return newConvo;
+  }
+  return convo;
 });
 
 export const markAsSeen = (state, convoID, senderId) => state.map((convo) => {
-    if (convo.id === convoID) {
-        const newConvo = {...convo};
-        newConvo.messages = convo.messages.map((message) => {
-            // mark only received messages as seen
-            // senderId from param is the id of current user
-            if (message.senderId !== senderId) {
-                message.seen = true;
-            }
-            return message;
-        });
-        newConvo.unreadMsgs = 0;
-        return newConvo;
-    }
-    return convo;
+  if (convo.id === convoID) {
+    const newConvo = {...convo};
+    newConvo.messages = convo.messages.map((message) => {
+      // mark only received messages as seen
+      // senderId from param is the id of current user
+      if (message.senderId !== senderId) {
+        message.seen = true;
+      }
+      return message;
+    });
+    newConvo.unreadMsgs = 0;
+    return newConvo;
+  }
+  return convo;
 });

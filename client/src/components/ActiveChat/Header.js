@@ -11,16 +11,16 @@ const useStyles = makeStyles((theme) => ({
         height: 89,
         marginBottom: 34,
         boxShadow: '0 2px 20px 0 rgba(88,133,196,0.10)',
-  },
-  content: {
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft: 24,
-  },
-  username: {
-    fontSize: 20,
-    letterSpacing: -0.29,
-    fontWeight: 'bold',
+    },
+    content: {
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: 24,
+    },
+    username: {
+        fontSize: 20,
+        letterSpacing: -0.29,
+        fontWeight: 'bold',
     marginRight: 14,
   },
   statusText: {
@@ -50,14 +50,14 @@ const Header = (props) => {
   const { username, online } = props;
 
   return (
-    <Box className={classes.root}>
-        <Box className={classes.content}>
-            <Typography className={classes.username}>{username}</Typography>
-            <Box className={`${classes.statusDot} ${classes[online && 'online']}`}/>
-            <Typography className={classes.statusText}>{online ? 'Online' : 'Offline'}</Typography>
-        </Box>
-        <MoreHorizIcon classes={{root: classes.ellipsis}}/>
-    </Box>
+      <Box className={classes.root}>
+          <Box className={classes.content}>
+              <Typography className={classes.username}>{username}</Typography>
+              <Box className={`${classes.statusDot} ${classes[online && 'online']}`}/>
+              <Typography className={classes.statusText}>{online ? 'Online' : 'Offline'}</Typography>
+          </Box>
+          <MoreHorizIcon classes={{root: classes.ellipsis}}/>
+      </Box>
   );
 };
 

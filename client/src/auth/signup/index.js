@@ -33,19 +33,19 @@ const Login = (props) => {
     const {user, register} = props;
     const [formErrorMessage, setFormErrorMessage] = useState({});
 
-  const handleRegister = async (event) => {
-    event.preventDefault();
-    const username = event.target.username.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    const confirmPassword = event.target.confirmPassword.value;
+    const handleRegister = async (event) => {
+        event.preventDefault();
+        const username = event.target.username.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const confirmPassword = event.target.confirmPassword.value;
 
-    if (password !== confirmPassword) {
-        setFormErrorMessage({confirmPassword: 'Passwords must match'});
+        if (password !== confirmPassword) {
+            setFormErrorMessage({confirmPassword: 'Passwords must match'});
       return;
     }
 
-      await register({username, email, password});
+        await register({username, email, password});
   };
 
   if (user.id) {

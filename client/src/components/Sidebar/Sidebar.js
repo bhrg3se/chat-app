@@ -13,10 +13,10 @@ const useStyles = makeStyles(() => ({
     title: {
         fontSize: 20,
         letterSpacing: -0.29,
-    fontWeight: 'bold',
-    marginTop: 32,
-    marginBottom: 15,
-  },
+        fontWeight: 'bold',
+        marginTop: 32,
+        marginBottom: 15,
+    },
 }));
 
 const Sidebar = (props) => {
@@ -25,14 +25,14 @@ const Sidebar = (props) => {
   const { handleChange, searchTerm } = props;
 
   return (
-    <Box className={classes.root}>
-      <CurrentUser />
-        <Typography className={classes.title}>Chats</Typography>
-        <Search handleChange={handleChange}/>
-        {conversations
-            .filter((conversation) => conversation.otherUser.username.includes(searchTerm))
-            .map((conversation) => <Chat conversation={conversation} key={conversation.otherUser.username}/>)}
-    </Box>
+      <Box className={classes.root}>
+          <CurrentUser/>
+          <Typography className={classes.title}>Chats</Typography>
+          <Search handleChange={handleChange}/>
+          {conversations
+              .filter((conversation) => conversation.otherUser.username.includes(searchTerm))
+              .map((conversation) => <Chat conversation={conversation} key={conversation.otherUser.username}/>)}
+      </Box>
   );
 };
 

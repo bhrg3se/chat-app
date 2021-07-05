@@ -18,19 +18,19 @@ const Home = (props) => {
     const classes = useStyles();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    props.fetchConversations();
-  }, []);
+    useEffect(() => {
+        props.fetchConversations();
+    }, []);
 
-  useEffect(() => {
-    setIsLoggedIn(true);
-  }, [props.user.id]);
+    useEffect(() => {
+        setIsLoggedIn(true);
+    }, [props.user.id]);
 
-  if (!props.user.id) {
-      // If we were previously logged in, redirect to login instead of register
-      if (isLoggedIn) return <Redirect to="/login"/>;
-      return <Redirect to="/register"/>;
-  }
+    if (!props.user.id) {
+        // If we were previously logged in, redirect to login instead of register
+        if (isLoggedIn) return <Redirect to="/login"/>;
+        return <Redirect to="/register"/>;
+    }
   return (
       <>
           <Grid container component="main" className={classes.root}>

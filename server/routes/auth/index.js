@@ -65,16 +65,16 @@ router.post('/login', async (req, res, next) => {
           console.log({error: 'Wrong username and/or password'});
           res.status(401).json({error: 'Wrong username and/or password'});
       } else {
-      const token = jwt.sign(
-          {id: user.dataValues.id},
-          process.env.SESSION_SECRET,
-          {expiresIn: 86400},
-      );
-      res.cookie('access-token', token, {
-        expires: new Date(Date.now() + 86400000),
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
+          const token = jwt.sign(
+              {id: user.dataValues.id},
+              process.env.SESSION_SECRET,
+              {expiresIn: 86400},
+          );
+          res.cookie('access-token', token, {
+              expires: new Date(Date.now() + 86400000),
+              httpOnly: true,
+              secure: true,
+              sameSite: 'strict',
       });
       res.json({
         ...user.dataValues,

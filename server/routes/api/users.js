@@ -11,15 +11,15 @@ router.get('/:username', async (req, res, next) => {
         }
         const {username} = req.params;
 
-    const users = await User.findAll({
-      where: {
-        username: {
-          [Op.substring]: username,
-        },
-        id: {
-          [Op.not]: req.user.id,
-        },
-      },
+        const users = await User.findAll({
+            where: {
+                username: {
+                    [Op.substring]: username,
+                },
+                id: {
+                    [Op.not]: req.user.id,
+                },
+            },
     });
 
     // add online status to each user that is online

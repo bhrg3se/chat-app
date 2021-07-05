@@ -13,13 +13,13 @@ const useStyles = makeStyles(() => ({
     },
     chatContainer: {
         marginLeft: 41,
-    marginRight: 41,
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    justifyContent: 'space-between',
-    overflowY: 'auto',
-  },
+        marginRight: 41,
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+        justifyContent: 'space-between',
+        overflowY: 'auto',
+    },
 }));
 
 const ActiveChat = (props) => {
@@ -30,24 +30,24 @@ const ActiveChat = (props) => {
   return (
     <Box className={classes.root}>
       {conversation.otherUser && (
-        <>
-            <Header
-                username={conversation.otherUser.username}
-                online={conversation.otherUser.online || false}
-            />
-            <Box className={classes.chatContainer}>
-                <Messages
-                    messages={conversation.messages}
-                    otherUser={conversation.otherUser}
-                    userId={user.id}
-                />
-            </Box>
-            <Input
-                otherUser={conversation.otherUser}
-                conversationId={conversation.id}
-                user={user}
-            />
-        </>
+          <>
+              <Header
+                  username={conversation.otherUser.username}
+                  online={conversation.otherUser.online || false}
+              />
+              <Box className={classes.chatContainer}>
+                  <Messages
+                      messages={conversation.messages}
+                      otherUser={conversation.otherUser}
+                      userId={user.id}
+                  />
+              </Box>
+              <Input
+                  otherUser={conversation.otherUser}
+                  conversationId={conversation.id}
+                  user={user}
+              />
+          </>
       )}
     </Box>
   );

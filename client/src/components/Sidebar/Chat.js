@@ -14,33 +14,33 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         '&:hover': {
-      cursor: 'grab',
+            cursor: 'grab',
+        },
     },
-  },
 }));
 
 const Chat = (props) => {
     const classes = useStyles();
     const {viewChat, conversation, user} = props;
 
-  const handleClick = () => {
-    viewChat(conversation.id, user.id, conversation.otherUser.id);
-  };
+    const handleClick = () => {
+        viewChat(conversation.id, user.id, conversation.otherUser.id);
+    };
 
-  return (
-      <Box
-          onClick={handleClick}
-          className={classes.root}
-      >
-          <BadgeAvatar
-              photoUrl={conversation.otherUser.photoUrl}
-              username={conversation.otherUser.username}
-              online={conversation.otherUser.online}
-              sidebar
-          />
-          <ChatContent conversation={conversation}/>
-      </Box>
-  );
+    return (
+        <Box
+            onClick={handleClick}
+            className={classes.root}
+        >
+            <BadgeAvatar
+                photoUrl={conversation.otherUser.photoUrl}
+                username={conversation.otherUser.username}
+                online={conversation.otherUser.online}
+                sidebar
+            />
+            <ChatContent conversation={conversation}/>
+        </Box>
+    );
 };
 
 const mapDispatchToProps = (dispatch) => ({

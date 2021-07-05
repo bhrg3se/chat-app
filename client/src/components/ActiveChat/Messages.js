@@ -21,9 +21,9 @@ const Messages = (props) => {
                       otherUserPhotoUrl={otherUser.photoUrl}
                   />
               ) : (
-          <OtherUserBubble key={message.id} text={message.text} time={time} otherUser={otherUser} />
-        );
-      })}
+                  <OtherUserBubble key={message.id} text={message.text} time={time} otherUser={otherUser}/>
+              );
+          })}
     </Box>
   );
 };
