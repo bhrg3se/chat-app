@@ -1,20 +1,21 @@
-import {Button, FormControl, FormHelperText, Grid, TextField} from "@material-ui/core";
-import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import {
+    Button, FormControl, FormHelperText, Grid, TextField,
+} from '@material-ui/core';
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
     textField: {
-        width: "50vw"
+        width: '50vw',
     },
 }));
-
 
 export const SignupForm = (props) => {
     const classes = useStyles();
     const {handleRegister, formErrorMessage} = props;
     return (
         <form onSubmit={handleRegister}>
-            <Grid container direction={"column"} spacing={1}>
+            <Grid container direction="column" spacing={1}>
                 <Grid item>
                     <FormControl fullWidth>
                         <TextField
@@ -22,7 +23,7 @@ export const SignupForm = (props) => {
                             aria-label="username"
                             label="Username"
                             name="username"
-                            autoComplete={"username"}
+                            autoComplete="username"
                             fullWidth
                             type="text"
                             required
@@ -36,7 +37,7 @@ export const SignupForm = (props) => {
                             label="E-mail address"
                             aria-label="e-mail address"
                             type="email"
-                            autoComplete={"email"}
+                            autoComplete="email"
                             fullWidth
                             name="email"
                             required
@@ -50,7 +51,7 @@ export const SignupForm = (props) => {
                             className={classes.textField}
                             label="Password"
                             type="password"
-                            autoComplete={"new-password"}
+                            autoComplete="new-password"
                             fullWidth
                             inputProps={{minLength: 6}}
                             name="password"
@@ -68,7 +69,7 @@ export const SignupForm = (props) => {
                             className={classes.textField}
                             aria-label="confirm password"
                             type="password"
-                            autoComplete={"new-password"}
+                            autoComplete="new-password"
                             fullWidth
                             inputProps={{minLength: 6}}
                             name="confirmPassword"
@@ -82,7 +83,7 @@ export const SignupForm = (props) => {
                 <Grid item/>
                 <Grid item/>
                 <Grid item/>
-                <Grid item alignItems={"center"} container direction={"row"}>
+                <Grid item alignItems="center" container direction="row">
                     <Grid item xs={4}/>
                     <Grid item xs={4}>
                         <Button
@@ -90,7 +91,7 @@ export const SignupForm = (props) => {
                             fullWidth
                             variant="contained"
                             size="large"
-                            color={"primary"}
+                            color="primary"
                         >
                             Create
                         </Button>
@@ -101,5 +102,5 @@ export const SignupForm = (props) => {
 
             </Grid>
         </form>
-    )
-}
+    );
+};

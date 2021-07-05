@@ -1,25 +1,25 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
-import { Input, Header, Messages } from "./index";
-import { connect } from "react-redux";
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
+import {Box} from '@material-ui/core';
+import {connect} from 'react-redux';
+import {Input, Header, Messages} from './index';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    display: "flex",
-    flexGrow: 8,
-    flexDirection: "column",
-    height: "100%"
-  },
-  chatContainer: {
-    marginLeft: 41,
-    marginRight: 41,
-    display: "flex",
-    flexDirection: "column",
-    flexGrow: 1,
-    justifyContent: "space-between",
-    overflowY: "auto",
-  }
+    root: {
+        display: 'flex',
+        flexGrow: 8,
+        flexDirection: 'column',
+        height: '100%',
+    },
+    chatContainer: {
+        marginLeft: 41,
+        marginRight: 41,
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+        justifyContent: 'space-between',
+        overflowY: 'auto',
+    },
 }));
 
 const ActiveChat = (props) => {
@@ -30,45 +30,41 @@ const ActiveChat = (props) => {
   return (
     <Box className={classes.root}>
       {conversation.otherUser && (
-        <>
-          <Header
-              username={conversation.otherUser.username}
-              online={conversation.otherUser.online || false}
-          />
-          <Box className={classes.chatContainer}>
-            <Messages
-                messages={conversation.messages}
-                otherUser={conversation.otherUser}
-                userId={user.id}
-            />
-          </Box>
-          <Input
-              otherUser={conversation.otherUser}
-              conversationId={conversation.id}
-              user={user}
-          />
-        </>
+          <>
+              <Header
+                  username={conversation.otherUser.username}
+                  online={conversation.otherUser.online || false}
+              />
+              <Box className={classes.chatContainer}>
+                  <Messages
+                      messages={conversation.messages}
+                      otherUser={conversation.otherUser}
+                      userId={user.id}
+                  />
+              </Box>
+              <Input
+                  otherUser={conversation.otherUser}
+                  conversationId={conversation.id}
+                  user={user}
+              />
+          </>
       )}
     </Box>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    conversation:
-      state.conversations &&
-      state.conversations.find(
-          (conversation) => {
-            if (conversation.id) {
-              return conversation.id === state.activeConversation.convoId
-            } else {
-              return conversation.otherUser.id === state.activeConversation.otherUserId
-            }
-
+const mapStateToProps = (state) => ({
+  user: state.user,
+  conversation:
+      state.conversations
+      && state.conversations.find(
+      (conversation) => {
+          if (conversation.id) {
+              return conversation.id === state.activeConversation.convoId;
           }
-      )
-  };
-};
+          return conversation.otherUser.id === state.activeConversation.otherUserId;
+      },
+      ),
+});
 
 export default connect(mapStateToProps, null)(ActiveChat);
