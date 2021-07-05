@@ -1,7 +1,7 @@
 import React from 'react';
-import {FormControl, FilledInput, InputAdornment} from '@material-ui/core';
+import { FormControl, FilledInput, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
   filledInput: {
@@ -30,22 +30,22 @@ const Search = (props) => {
     event.preventDefault();
   };
   return (
-      <form onSubmit={handleSubmit}>
-          <FormControl fullWidth hiddenLabel>
-              <FilledInput
-                  name="search"
-                  onChange={props.handleChange}
-                  classes={{root: classes.filledInput, input: classes.input}}
-                  disableUnderline
-                  placeholder="Search"
-                  startAdornment={(
-                      <InputAdornment position="start">
-                          <SearchIcon/>
-                      </InputAdornment>
+    <form onSubmit={handleSubmit}>
+      <FormControl fullWidth hiddenLabel>
+        <FilledInput
+          name="search"
+          onChange={props.handleChange}
+          classes={{ root: classes.filledInput, input: classes.input }}
+          disableUnderline
+          placeholder="Search"
+          startAdornment={(
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
                   )}
-              />
-          </FormControl>
-      </form>
+        />
+      </FormControl>
+    </form>
   );
 };
 

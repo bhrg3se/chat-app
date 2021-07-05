@@ -1,11 +1,11 @@
 export const addMessageToStore = (state, payload) => {
-  const {message, sender} = payload;
+  const { message, sender } = payload;
 
   // if sender is null, that means the message needs to be appended in a existing convo and move the convo to the top
   if (sender === null) {
     const convos = [...state];
     const i = state.findIndex((convo) => convo.id === message.conversationId);
-    const convo = {...convos[i]};
+    const convo = { ...convos[i] };
     if (!convo) {
       return convos;
     }
@@ -32,7 +32,7 @@ export const addMessageToStore = (state, payload) => {
 
 export const addOnlineUserToStore = (state, id) => state.map((convo) => {
   if (convo.otherUser.id === id) {
-    const convoCopy = {...convo};
+    const convoCopy = { ...convo };
     convoCopy.otherUser.online = true;
     return convoCopy;
   }
@@ -41,7 +41,7 @@ export const addOnlineUserToStore = (state, id) => state.map((convo) => {
 
 export const removeOfflineUserFromStore = (state, id) => state.map((convo) => {
   if (convo.otherUser.id === id) {
-    const convoCopy = {...convo};
+    const convoCopy = { ...convo };
     convoCopy.otherUser.online = false;
     return convoCopy;
   }
@@ -60,7 +60,7 @@ export const addSearchedUsersToStore = (state, users) => {
   users.forEach((user) => {
     // only create a fake convo if we don't already have a convo with this user
     if (!currentUsers[user.id]) {
-      const fakeConvo = {otherUser: user, messages: []};
+      const fakeConvo = { otherUser: user, messages: [] };
       newState.push(fakeConvo);
     }
   });
@@ -70,7 +70,7 @@ export const addSearchedUsersToStore = (state, users) => {
 
 export const addNewConvoToStore = (state, recipientId, message) => state.map((convo) => {
   if (convo.otherUser.id === recipientId) {
-    const newConvo = {...convo};
+    const newConvo = { ...convo };
     newConvo.id = message.conversationId;
     newConvo.messages.push(message);
     newConvo.latestMessageText = message.text;
@@ -81,7 +81,7 @@ export const addNewConvoToStore = (state, recipientId, message) => state.map((co
 
 export const markAsSeen = (state, convoID, senderId) => state.map((convo) => {
   if (convo.id === convoID) {
-    const newConvo = {...convo};
+    const newConvo = { ...convo };
     newConvo.messages = convo.messages.map((message) => {
       // mark only received messages as seen
       // senderId from param is the id of current user

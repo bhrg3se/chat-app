@@ -7,16 +7,16 @@ import {
   setSearchedUsers,
   markMessagesAsSeen,
 } from '../conversations';
-import {gotUser, setFetchingStatus} from '../user';
-import {conversationCompareFunc} from './sortutil';
-import {setActiveChat} from '../activeConversation';
+import { gotUser, setFetchingStatus } from '../user';
+import { conversationCompareFunc } from './sortutil';
+import { setActiveChat } from '../activeConversation';
 
 // USER THUNK CREATORS
 
 export const fetchUser = () => async (dispatch) => {
   dispatch(setFetchingStatus(true));
   try {
-    const {data} = await axios.get('/auth/user');
+    const { data } = await axios.get('/auth/user');
     dispatch(gotUser(data));
     if (data.id) {
       socket.emit('go-online');
@@ -30,23 +30,23 @@ export const fetchUser = () => async (dispatch) => {
 
 export const register = (credentials) => async (dispatch) => {
   try {
-    const {data} = await axios.post('/auth/register', credentials);
+    const { data } = await axios.post('/auth/register', credentials);
     dispatch(gotUser(data));
     socket.emit('go-online');
   } catch (error) {
     console.error(error);
-    dispatch(gotUser({error: error.response.data.error || 'Server Error'}));
+    dispatch(gotUser({ error: error.response.data.error || 'Server Error' }));
   }
 };
 
 export const login = (credentials) => async (dispatch) => {
   try {
-    const {data} = await axios.post('/auth/login', credentials);
+    const { data } = await axios.post('/auth/login', credentials);
     dispatch(gotUser(data));
     socket.emit('go-online');
   } catch (error) {
     console.error(error);
-    dispatch(gotUser({error: error.response.data.error || 'Server Error'}));
+    dispatch(gotUser({ error: error.response.data.error || 'Server Error' }));
   }
 };
 
@@ -64,7 +64,7 @@ export const logout = () => async (dispatch) => {
 
 export const fetchConversations = () => async (dispatch) => {
   try {
-    const {data} = await axios.get('/api/conversations');
+    const { data } = await axios.get('/api/conversations');
     const sorted = await data.sort(conversationCompareFunc);
     dispatch(gotConversations(sorted));
   } catch (error) {
@@ -85,7 +85,7 @@ export const viewChat = (convoId, senderId, otherUserId) => async (dispatch) => 
 };
 
 const saveMessage = async (body) => {
-  const {data} = await axios.post('/api/messages', body);
+  const { data } = await axios.post('/api/messages', body);
   return data;
 };
 

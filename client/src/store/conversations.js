@@ -1,9 +1,9 @@
 import {
-    addNewConvoToStore,
-    addOnlineUserToStore,
-    addSearchedUsersToStore,
-    removeOfflineUserFromStore,
-    addMessageToStore, markAsSeen,
+  addNewConvoToStore,
+  addOnlineUserToStore,
+  addSearchedUsersToStore,
+  removeOfflineUserFromStore,
+  addMessageToStore, markAsSeen,
 } from './utils/reducerFunctions';
 
 // ACTIONS
@@ -20,44 +20,44 @@ const MARK_AS_SEEN = 'MARK_AS_SEEN';
 // ACTION CREATORS
 
 export const gotConversations = (conversations) => ({
-    type: GET_CONVERSATIONS,
-    conversations,
+  type: GET_CONVERSATIONS,
+  conversations,
 });
 
 export const setNewMessage = (message, sender) => ({
-    type: SET_MESSAGE,
-    payload: {message, sender: sender || null},
+  type: SET_MESSAGE,
+  payload: { message, sender: sender || null },
 });
 
 export const addOnlineUser = (id) => ({
-    type: ADD_ONLINE_USER,
-    id,
+  type: ADD_ONLINE_USER,
+  id,
 });
 
 export const removeOfflineUser = (id) => ({
-    type: REMOVE_OFFLINE_USER,
-    id,
+  type: REMOVE_OFFLINE_USER,
+  id,
 });
 
 export const setSearchedUsers = (users) => ({
-    type: SET_SEARCHED_USERS,
-    users,
+  type: SET_SEARCHED_USERS,
+  users,
 });
 
 export const clearSearchedUsers = () => ({
-    type: CLEAR_SEARCHED_USERS,
+  type: CLEAR_SEARCHED_USERS,
 });
 
 // add new conversation when sending a new message
 export const addConversation = (recipientId, newMessage) => ({
-    type: ADD_CONVERSATION,
-    payload: {recipientId, newMessage},
+  type: ADD_CONVERSATION,
+  payload: { recipientId, newMessage },
 });
 
 // mark all messages as seen in a conversation
 export const markMessagesAsSeen = (convoId, senderId) => ({
-    type: MARK_AS_SEEN,
-    payload: {convoId, senderId},
+  type: MARK_AS_SEEN,
+  payload: { convoId, senderId },
 });
 
 // REDUCER
@@ -80,12 +80,12 @@ const reducer = (state = [], action) => {
       return state.filter((convo) => convo.id);
     case ADD_CONVERSATION:
       return addNewConvoToStore(
-          state,
-          action.payload.recipientId,
-          action.payload.newMessage,
+        state,
+        action.payload.recipientId,
+        action.payload.newMessage,
       );
     case MARK_AS_SEEN:
-        return markAsSeen(state, action.payload.convoId, action.payload.senderId);
+      return markAsSeen(state, action.payload.convoId, action.payload.senderId);
     default:
       return state;
   }
