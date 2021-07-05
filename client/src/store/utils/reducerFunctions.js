@@ -11,6 +11,9 @@ export const addMessageToStore = (state, payload) => {
     }
     convo.messages.push(message);
     convo.latestMessageText = message.text;
+    if (!message.seen && message.senderId === convo.otherUser.id) {
+      convo.unreadMsgs += 1
+    }
 
     //bring the convo to the top of the chat list
     convos.splice(i, 1)

@@ -22,6 +22,7 @@ export const LoginForm = (props) => {
                             className={classes.textField}
                             aria-label="username"
                             label="Username"
+                            autoComplete={"username"}
                             name="username"
                             type="text"
                         />
@@ -33,6 +34,7 @@ export const LoginForm = (props) => {
                             className={classes.textField}
                             label="password"
                             aria-label="password"
+                            autoComplete={"current-password"}
                             type="password"
                             name="password"
                         />
@@ -43,7 +45,7 @@ export const LoginForm = (props) => {
                 <Grid item/>
                 <Grid item alignItems={"center"} container direction={"row"}>
                     <Grid item xs={4}/>
-                    <Grid item xs={4} alignItems={"center"}>
+                    <Grid item xs={4}>
                         <Button
                             type="submit"
                             fullWidth

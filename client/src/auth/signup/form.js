@@ -22,6 +22,7 @@ export const SignupForm = (props) => {
                             aria-label="username"
                             label="Username"
                             name="username"
+                            autoComplete={"username"}
                             fullWidth
                             type="text"
                             required
@@ -35,6 +36,7 @@ export const SignupForm = (props) => {
                             label="E-mail address"
                             aria-label="e-mail address"
                             type="email"
+                            autoComplete={"email"}
                             fullWidth
                             name="email"
                             required
@@ -48,6 +50,7 @@ export const SignupForm = (props) => {
                             className={classes.textField}
                             label="Password"
                             type="password"
+                            autoComplete={"new-password"}
                             fullWidth
                             inputProps={{minLength: 6}}
                             name="password"
@@ -65,6 +68,7 @@ export const SignupForm = (props) => {
                             className={classes.textField}
                             aria-label="confirm password"
                             type="password"
+                            autoComplete={"new-password"}
                             fullWidth
                             inputProps={{minLength: 6}}
                             name="confirmPassword"
@@ -80,7 +84,7 @@ export const SignupForm = (props) => {
                 <Grid item/>
                 <Grid item alignItems={"center"} container direction={"row"}>
                     <Grid item xs={4}/>
-                    <Grid item xs={4} alignItems={"center"}>
+                    <Grid item xs={4}>
                         <Button
                             type="submit"
                             fullWidth
