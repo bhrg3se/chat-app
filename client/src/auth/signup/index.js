@@ -42,14 +42,14 @@ const Login = (props) => {
 
         if (password !== confirmPassword) {
             setFormErrorMessage({confirmPassword: 'Passwords must match'});
-      return;
-    }
+            return;
+        }
 
         await register({username, email, password});
-  };
+    };
 
-  if (user.id) {
-      return <Redirect to="/home"/>;
+    if (user.id) {
+        return <Redirect to="/home"/>;
   }
 
   return (

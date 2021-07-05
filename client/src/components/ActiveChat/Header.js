@@ -21,16 +21,16 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 20,
         letterSpacing: -0.29,
         fontWeight: 'bold',
-    marginRight: 14,
-  },
-  statusText: {
-    fontSize: 12,
-    color: '#BFC9DB',
-    letterSpacing: -0.17,
-  },
-  statusDot: {
-    height: 8,
-    width: 8,
+        marginRight: 14,
+    },
+    statusText: {
+        fontSize: 12,
+        color: '#BFC9DB',
+        letterSpacing: -0.17,
+    },
+    statusDot: {
+        height: 8,
+        width: 8,
     borderRadius: '50%',
     marginRight: 5,
     backgroundColor: '#D0DAE9',

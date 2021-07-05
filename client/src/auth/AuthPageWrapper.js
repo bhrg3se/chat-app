@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {
-  Grid,
-  Typography,
+    Grid,
+    Typography,
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
@@ -35,46 +35,46 @@ const AuthPageWrapper = (props) => {
 
   return (
       <Grid justify="center" container spacing={0} direction="row">
-        <Hidden xsDown>
-          <Grid key={1} xs={4} item className={classes.leftPortion}>
-            <Grid
-                className={classes.blueLayer}
-                container
-                direction="row"
-                alignContent="center"
-            >
-              <Grid item xs={12} align="center">
-                <img alt="Hello" className={classes.bubble} src={SVGBUbble}/>
+          <Hidden xsDown>
+              <Grid key={1} xs={4} item className={classes.leftPortion}>
+                  <Grid
+                      className={classes.blueLayer}
+                      container
+                      direction="row"
+                      alignContent="center"
+                  >
+                      <Grid item xs={12} align="center">
+                          <img alt="Hello" className={classes.bubble} src={SVGBUbble}/>
+                      </Grid>
+                      <Grid item xs={12} align="center">
+                          <Typography
+                              className={classes.text}
+                              variant="h4"
+                          >
+                              Converse with anyone
+                              {' '}
+                              <br/>
+                              with any language
+                          </Typography>
+                      </Grid>
+                  </Grid>
+
               </Grid>
-              <Grid item xs={12} align="center">
-                <Typography
-                    className={classes.text}
-                    variant="h4"
-                >
-                  Converse with anyone
-                  {' '}
-                  <br/>
-                  with any language
-                </Typography>
-              </Grid>
-            </Grid>
+          </Hidden>
+
+          <Grid
+              key={2}
+              xs={8}
+              item
+              container
+              direction="column"
+              alignContent="center"
+              wrap="nowrap"
+              alignItems="center"
+          >
+              {props.children}
 
           </Grid>
-        </Hidden>
-
-        <Grid
-            key={2}
-            xs={8}
-            item
-            container
-            direction="column"
-            alignContent="center"
-            wrap="nowrap"
-            alignItems="center"
-        >
-          {props.children}
-
-        </Grid>
 
       </Grid>
 

@@ -39,20 +39,20 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '10px',
     },
 
-  notification: {
-      height: 20,
-      width: 20,
-      backgroundColor: '#3F92FF',
-      marginRight: 10,
-      color: 'white',
-      fontSize: 10,
-      letterSpacing: -0.5,
-      fontWeight: 'bold',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 10,
-  },
+    notification: {
+        height: 20,
+        width: 20,
+        backgroundColor: '#3F92FF',
+        marginRight: 10,
+        color: 'white',
+        fontSize: 10,
+        letterSpacing: -0.5,
+        fontWeight: 'bold',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+    },
 }));
 
 const ChatContent = (props) => {

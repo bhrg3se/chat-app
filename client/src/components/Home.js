@@ -31,15 +31,15 @@ const Home = (props) => {
         if (isLoggedIn) return <Redirect to="/login"/>;
         return <Redirect to="/register"/>;
     }
-  return (
-      <>
-          <Grid container component="main" className={classes.root}>
-              <CssBaseline/>
-              <SidebarContainer/>
-              <ActiveChat/>
-          </Grid>
-      </>
-  );
+    return (
+        <>
+            <Grid container component="main" className={classes.root}>
+                <CssBaseline/>
+                <SidebarContainer/>
+                <ActiveChat/>
+            </Grid>
+        </>
+    );
 };
 
 const mapStateToProps = (state) => ({
