@@ -13,65 +13,92 @@ type RouterProps = {
   fetchUser: () => void
 }
 const Routes = (props: RouterProps) => {
-  const {user, fetchUser} = props;
-  const [errorMessage, setErrorMessage] = useState("");
-  const [snackBarOpen, setSnackBarOpen] = useState(false);
 
-  useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+        const {user, fetchUser} = props,
+            [
+                errorMessage,
+                setErrorMessage
+            ] = useState(""),
+            [
+                snackBarOpen,
+                setSnackBarOpen
+            ] = useState(false);
 
-  useEffect(() => {
-    if (user.error) {
-      // check to make sure error is what we expect, in case we get an unexpected server error object
-      if (typeof user.error === "string") {
-        setErrorMessage(user.error);
-      } else {
-        setErrorMessage("Internal Server Error. Please try again");
-      }
-      setSnackBarOpen(true);
-    }
-  }, [user.error]);
+        useEffect(
+            () => {
 
-  if (props.user.isFetchingUser) {
-    return <div>Loading...</div>;
-  }
+                fetchUser();
 
-  return (
-    <>
-      {snackBarOpen && (
+            },
+            [fetchUser]
+        );
+
+        useEffect(
+            () => {
+
+                if (user.error) {
+
+                    // Check to make sure error is what we expect, in case we get an unexpected server error object
+                    if (typeof user.error === "string") {
+
+                        setErrorMessage(user.error);
+
+                    } else {
+
+                        setErrorMessage("Internal Server Error. Please try again");
+
+                    }
+                    setSnackBarOpen(true);
+
+                }
+
+            },
+            [user.error]
+        );
+
+        if (props.user.isFetchingUser) {
+
+            return <div>Loading...</div>;
+
+        }
+
+        return (
+            <>
+                {snackBarOpen &&
         <SnackbarError
-          setSnackBarOpen={setSnackBarOpen}
-          errorMessage={errorMessage}
-          snackBarOpen={snackBarOpen}
+            setSnackBarOpen={setSnackBarOpen}
+            errorMessage={errorMessage}
+            snackBarOpen={snackBarOpen}
         />
-      )}
-      <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Signup} />
-        <Route
-          exact
-          path="/"
-          render={(props) => (props.user?.id ? <Home /> : <Signup />)}
-        />
-        <Route path="/home" component={Home} />
-      </Switch>
-    </>
-  );
-};
+                }
+                <Switch>
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Signup} />
+                    <Route
+                        exact
+                        path="/"
+                        render={(props) => (props.user?.id ? <Home /> : <Signup />)}
+                    />
+                    <Route path="/home" component={Home} />
+                </Switch>
+            </>
+        );
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchUser() {
-      dispatch(fetchUser());
     },
-  };
-};
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes));
+    mapStateToProps = (state) => ({
+        "user": state.user
+    }),
+
+    mapDispatchToProps = (dispatch) => ({
+        fetchUser () {
+
+            dispatch(fetchUser());
+
+        }
+    });
+
+export default withRouter(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Routes));
